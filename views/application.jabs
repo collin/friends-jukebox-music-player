@@ -1,0 +1,23 @@
+:ready
+  $input[default_value]
+    :blur
+      if @value === ''
+        @value = @default_value
+ 
+    :focus
+      if @value === @default_value
+        @value = ''
+    .blur()
+
+  $.password
+    :blur
+      if @value === ""
+        var faux = $this.prev()  
+        .hide()
+        faux.show().val(faux.attr('default_value'))
+        
+    .blur()
+
+  $.faux-password
+    :focus
+      .hide().next().show().focus()

@@ -1,0 +1,27 @@
+%ol
+  %li Choose some friends
+  %li Line up some music
+  %li Listen!
+%hr/
+%p You have some options:
+%dl
+  %dt Sign in:
+  %dd
+    %form{:action => "signin", :method => "post"}
+      %input{:type => "text", :default_value => "username", :name => "username"}
+      %input.faux-password{:type => "text", :default_value => "password"}
+      %input.password{:type => "password", :name => "password"}
+      %input{:type => "submit", :value => "shuffle on down"}
+
+  %dt Sign up:
+  %dd 
+    %form{:action => "/signup", :method => "post"}
+      %input{:type=>"text", :default_value => "username", :name => "username"}
+      %input.faux-password{:type => "text", :default_value => "password"}
+      %input.password{:type => "password", :name => "password"}
+      %input{:type => "submit", :value => "get your quarters"}
+
+  %dt or get out:
+  %dd
+    %a{:href=>"http://yahoo.com"} Try Google. Plenty to see there.
+
