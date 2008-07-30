@@ -1,11 +1,11 @@
 %p 
-  == Hey #{@current_user.name.upcase} you made it to the Jukebox!
+  == Hey #{h @current_user.name.upcase} you made it to the Jukebox!
   %a.player{:href=>"/player"} Start listening
   and make some selections
 
-%form{:action => "/songs", :method => "post"}
-  %input{:type=>"file", :name => "file"}
-  %input{:type=>"submit", :value=>">"}
+%form.song{:action => "/songs", :method => "post", :enctype=>"multipart/form-data"}
+  %input{:type=>"file", :name => "file", :value => ""}
+  %input{:type=>"submit", :value=> ">"}
 
 %p Here's whats coming up:
 

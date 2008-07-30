@@ -2,6 +2,8 @@ require 'rubygems'
 require 'pathname'
 require 'sequel'
 require 'bcrypt'
+require 'tempfile'
+require 'uuid'
 
 __DIR__ = Pathname.new(__FILE__).dirname.expand_path
 
@@ -21,6 +23,7 @@ ClosedURLs = %w{
   /player
   /listen
   /signout
+  /songs
 }
 
 before do
@@ -95,6 +98,13 @@ delete "/signout" do
   session[:user_id] = 0
   session[:flash] = "Thanks for listening. Come back soon!"
   redirect "/"
+end
+
+post "/songs" do
+#   song = params["song"]
+#   temp = Tempfile.new("jukebox")
+#   name = "/songs/#{UUID.new}.ogg"
+  redirect "/jukebox"
 end
 
 def jabs target
