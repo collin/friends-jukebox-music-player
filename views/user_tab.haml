@@ -1,0 +1,12 @@
+%ul.links
+  %li 
+    %a{:href => "/jukebox"} Jukebox
+  %li
+    %a{:href => "/friends"} Friends
+  %li
+    %a{:href => "/listen"}  Listen
+  %li
+    %a.signout{:href => "/signout"} Sign Out
+
+%form.signout{:action => "/signout", :method => "post"}
+  %input{:type => "hidden", :name => "_method", :value => "DELETE"}

@@ -10,12 +10,12 @@ namespace :db do
     last_migration = __DIR__+"models"+"migrations"+".last-migration"
     models = Dir.glob(__DIR__+"models"+"migrations"+"*.rb").reject{|m|
       File.mtime(m) < File.mtime(last_migration)
-    }.sort{|x, y| x.mtime <=> y.mtime}
+    }.sort{|x, y| File.mtime(x) <=> File.mtime(y)}
 
     models.each{|m| require m}
 
     unless models.length == 0
-      new_mtime = File.mtime(models.last)
+      new_mtime = File.mtime(models.first)
       last_migration.utime new_mtime, new_mtime
     end
 
@@ -28,4 +28,8 @@ namespace :db do
       end if c.is_a?(Class)
     end
   end
+end
+
+task :cleanup do 
+  Dir.glob("**/*.*~")+Dir.glob("**/*~").each{|swap|FileUtils.rm(swap, :force => true)}
 end

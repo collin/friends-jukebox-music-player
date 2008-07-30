@@ -7,17 +7,33 @@
     :focus
       if @value === @default_value
         @value = ''
+    :keyup
+      var submit = $this.parent().find('input[type="submit"]');
+      submit.removeAttr('disabled')
+
+      if @value === @default_value || @value === ''
+        submit.attr('disabled', true)
+
     .blur()
+    .keyup()
 
   $.password
     :blur
       if @value === ""
-        var faux = $this.prev()  
         .hide()
+
+        var faux = $this.prev()
         faux.show().val(faux.attr('default_value'))
         
     .blur()
-
+  
   $.faux-password
     :focus
       .hide().next().show().focus()
+
+  $a.signout
+    :click
+      e.preventDefault()
+      $form.signout
+        console.log("SIGNOUT")
+        .submit()

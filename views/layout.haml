@@ -1,29 +1,85 @@
 !!!
 %style
   :sass
+    !blue= #5599ee
+    !orange= #ee5599
+    !grey= #fafafa
+    !border= #ccc
+
+    *
+      :outline none
+
     body, html
       :margin 0px
       :padding 0px
     
     body
-      :background-color #fafafa
+      :background-color= !grey
       :padding 10px 40px
 
     input, hr
       :border-style outset
 
-    
-
     hr
-      :border-color #ccc
+      :border-color= !border
+      :clear both
+      :margin-bottom 50px
+
+    h1 a
+      :text-decoration none
+
+    a
+      :color black
+
+    a:hover
+      :color= !blue !important
+      :text-decoration underline
+
+    .flash
+      :background-color= !blue + #454545
+      :padding 5px
+      :font-weight bold
+      :display inline
+      :color= !orange
+
+    .links
+      :list-style none
+      :clear both
+      :margin 0
+      :padding 0
+      :margin-top 20px
+
+      li
+        :float left
+        :position relative
+        :top 20px
+        :margin-bottom 10px
+
+        a
+          :text-decoration none
+          :background-color white
+          :padding 5px 10px
+
+        a:hover
+          :color= !blue
+          :background-color black
 %html
   %head
     %title Friends' Jukebox Music-Player
     %script{:src => "/jquery-1.2.6.js"}
+    %script{:src => "/jquery.form.js"}
+    %script{:src => "/jquery-ui-personalized-1.5.2.packed.js"}
     %script{:src => "/application.js"}
     
   %body
-    %h1 The Friends' Jukebox Music-Player
+    %h1 
+      %a{:href => "/"} The Friends' Jukebox Music-Player
     %p What a wonderful way to listen to music.
+    - if session[:flash]
+      %p.flash= session[:flash]
+      - session[:flash] = nil
+
+    - if @current_user
+      =partial :user_tab
     %hr/
     =yield

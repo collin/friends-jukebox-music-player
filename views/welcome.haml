@@ -7,18 +7,14 @@
 %dl
   %dt Sign in:
   %dd
-    %form{:action => "signin", :method => "post"}
-      %input{:type => "text", :default_value => "username", :name => "username"}
-      %input.faux-password{:type => "text", :default_value => "password"}
-      %input.password{:type => "password", :name => "password"}
+    %form{:action => "/signin", :method => "post"}
+      =partial(:user_form)
       %input{:type => "submit", :value => "shuffle on down"}
 
   %dt Sign up:
   %dd 
     %form{:action => "/signup", :method => "post"}
-      %input{:type=>"text", :default_value => "username", :name => "username"}
-      %input.faux-password{:type => "text", :default_value => "password"}
-      %input.password{:type => "password", :name => "password"}
+      =partial(:user_form)
       %input{:type => "submit", :value => "get your quarters"}
 
   %dt or get out:

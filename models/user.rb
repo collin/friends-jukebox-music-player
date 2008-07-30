@@ -1,5 +1,7 @@
 class User < Sequel::Model(:users)
   include BCrypt
+  
+  has_many :picks
 
   validates_presence_of :name
 
