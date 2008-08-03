@@ -1,0 +1,373 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>API TEST</title>
+</head>
+<body>
+
+<table colspan="2">
+	  <td><div id="playerDiv"></div></td>
+      <td>
+      	Show Events?<input name="showEvent_ch" type="checkbox" id="showEvent_ch" onchange="showEvents(playerOne, this.checked)" />
+        <br>
+		<textarea name="events_txt" cols="50" rows="12" id="events_txt">EVENT LOGGER
+</textarea>
+      </td>
+</table>
+
+
+<table>
+	<td>
+        <form id="controls_form" name="auto_form" method="post" action="">
+            <input type="button" name="playPause_btn"  id="playPause_btn" value="Play/Pause" onclick="playPause(playerOne, url_form.play_txt.value)")/>
+            <input type="button" name="stop_btn"  id="stop_btn" value="Stop" onclick="stopVideo(playerOne)")/>
+            <input type="button" name="seekFor_btn"  id="seekFor_btn" value="Rewind" onclick="seek(playerOne, -5)")/>
+             <input type="button" name="seekBack_btn"  id="Seek " value="Fast Forward" onclick="seek(playerOne, 5)")/>
+            <input type="button" name="mute_btn"  id="mute_btn" value="Mute" onclick="mute(playerOne)")/>
+        </form>
+    </td>
+</table>
+
+<table>    
+ 	<tr>
+   	  <td bgcolor="#CCCCCC">
+        	<form id="auto_form" name="auto_form" method="post" action="">
+            	Auto-Load: <input name="autoLoad_ch" type="checkbox" id="autoLoad_ch" onchange="setAutoLoad(playerOne, autoLoad_ch.checked)" />
+                Auto-Play: <input name="autoPlay_ch" type="checkbox" id="autoPlay_ch" onchange="setAutoPlay(playerOne, autoPlay_ch.checked)" />
+                Click to Toggle Play: <input name="togglePlay_ch" type="checkbox" checked="checked" id="togglePlay_ch" onchange="setToggleClick(playerOne, togglePlay_ch.checked)" />
+            </form>
+        </td>
+    </tr>
+
+    <tr>
+    	<td bgcolor="#CCCCCC">
+    		<form id="url_form" name="url_form" method="post" action="">
+    	    	<label>
+    	   			<input name="load_txt" type="text" id="load_txt" value="demo_video.flv"/>
+                    <input type="button" name="load_btn"  id="load_btn" value="Load"  onclick="load(playerOne, load_txt.value)"/>
+    	  		</label>
+               
+                <label>
+    	   			<input name="play_txt" type="text" id="play_txt" value="demo_video.flv"/>
+                    <input type="button" name="play_btn"  id="play_btn" value="Play"  onclick="play(playerOne, play_txt.value)"/>
+    	  		</label>
+           </form>
+   	    </td>
+    <tr>
+    
+     <tr>
+    	<td bgcolor="#CCCCCC">
+    		<form id="previewImage_form" name="previewImage_form" method="post" action="">
+    	    	<label>
+    	   			<input name="previewImage_txt" type="text" id="previewImage_txt" value="previewImage.jpg"/>
+                    <input type="button" name="previewImage_btn"  id="previewImage_btn" value="Set"  onclick="setPreviewImage(playerOne, previewImage_txt.value)"/>
+    	  		</label>
+         	</form>
+        </td>
+     </tr>
+    
+    <tr>
+    	<td bgcolor="#CCCCCC">Size:
+    	  <form id="size_form" name="size_form" method="post" action="">
+    	    	<label>w:&nbsp;<input name="width_txt" type="text" id="width_txt" value="640"/></label>
+                <label>h:&nbsp;<input name="height_txt" type="text" id="height_txt" value="480"/></label>
+                <form id="align_form" name="align_form" method="post" action="">
+                 <input type="button" name="size_btn"  id="size_btn" value="Apply"  onclick="setSize(playerOne, width_txt.value, height_txt.value)"/>
+                <br>
+         		Align:<select name="videoAlignment" onChange="changeAlignment(playerOne, this.form)">
+                    <option value="bottom">Bottom</option>
+                    <option value="bottomLeft">Bottom Left</option>
+                    <option value="bottomRight">Bottom Right</option>
+                    <option value="top">Top</option>
+                    <option value="topLeft">Top Left</option>
+                    <option value="topRight">Top Right</option>
+                    <option value="center">Center</option>
+                    <option value="left">Left</option>
+                    <option value="right">Right</option>
+				</select>
+              	Scale Mode:<select name="videoScaleMode" onChange="changeScaleMode(playerOne, this.form)">
+               		<option value="maintainAspectRatio">Maintain Aspect Ratio</option>
+                	<option value="noScale">No Scale</option>
+                	<option value="exactFit">Exact Fit</option>
+				</select>
+               
+            </form>
+       	  </form>
+    	</td>
+    </tr>
+ 	   
+  	<tr>
+   	  <td bgcolor="#CCCCCC">Skins:
+        	<form id="skin_form" name="skin_form" method="post" action="">
+            	Visible: <input name="visible_ch" type="checkbox" id="visible_ch" checked="checked"  onchange="setSkinVisible(playerOne, visible_ch.checked)" />
+                Auto-hide: <input name="autoHide_ch" type="checkbox" id="autoHide_ch" onchange="setSkinAutoHide(playerOne, autoHide_ch.checked)" />
+                Change Skin:
+          			<select name="videoSkin" onChange="changeSkin(playerOne, this.form);">
+           				<option value="ArcticExternalAll.swf">ArcticExternalAll</option>
+						<option value="ArcticExternalNoVol.swf">ArcticExternalNoVol</option>
+						<option value="ArcticExternalPlayMute.swf">ArcticExternalPlayMute</option>
+						<option value="ArcticExternalPlaySeekMute.swf">ArcticExternalPlaySeekMute</option>
+						<option value="ArcticOverAll.swf">ArcticOverAll</option>
+						<option value="ArcticOverNoVol.swf">ArcticOverNoVol</option>
+						<option value="ArcticOverPlayMute.swf">ArcticOverPlayMute</option>
+						<option value="ArcticOverPlaySeekMute.swf">ArcticOverPlaySeekMute</option>
+						<option value="ClearExternalAll.swf">ClearExternalAll</option>
+						<option value="ClearExternalNoVol.swf">ClearExternalNoVol</option>
+						<option value="ClearExternalPlayMute.swf">ClearExternalPlayMute</option>
+						<option value="ClearExternalPlaySeekMute.swf">ClearExternalPlaySeekMute</option>
+						<option value="ClearOverAll.swf">ClearOverAll</option>
+						<option value="ClearOverNoVol.swf">ClearOverNoVol</option>
+						<option value="ClearOverPlayMute.swf">ClearOverPlayMute</option>
+						<option value="ClearOverPlaySeekMute.swf">ClearOverPlaySeekMute</option>
+						<option value="MojaveExternalAll.swf">MojaveExternalAll</option>
+						<option value="MojaveExternalNoVol.swf">MojaveExternalNoVol</option>
+						<option value="MojaveExternalPlayMute.swf">MojaveExternalPlayMute</option>
+						<option value="MojaveExternalPlaySeekMute.swf">MojaveExternalPlaySeekMute</option>
+						<option value="MojaveOverAll.swf">MojaveOverAll</option>
+						<option value="MojaveOverNoVol.swf">MojaveOverNoVol</option>
+						<option value="MojaveOverPlayMute.swf">MojaveOverPlayMute</option>
+						<option value="MojaveOverPlaySeekMute.swf">MojaveOverPlaySeekMute</option>
+						<option value="SteelExternalAll.swf">SteelExternalAll</option>
+						<option value="SteelExternalNoVol.swf">SteelExternalNoVol</option>
+						<option value="SteelExternalPlayMute.swf">SteelExternalPlayMute</option>
+						<option value="SteelExternalPlaySeekMute.swf">SteelExternalPlaySeekMute</option>
+						<option value="SteelOverAll.swf">SteelOverAll</option>
+						<option value="SteelOverNoVol.swf">SteelOverNoVol</option>
+						<option value="SteelOverPlayMute.swf">SteelOverPlayMute</option>
+						<option value="SteelOverPlaySeekMute.swf">SteelOverPlaySeekMute</option>
+					</select>
+                    <br>
+                Change Theme:
+                	<select name="themeColor" onChange="changeTheme(playerOne, this.form)">
+                    <option value="Halo">Halo</option>
+                    <option value="0xff0000">Red</option>
+                    <option value="0x00ff00">Green</option>
+                    <option value="0x0000ff">Blue</option>
+                    <option value="0x00ffff">Cyan</option>
+                    <option value="0xff00ff">Magenta</option>
+                    <option value="0xffff00">Yellow</option>
+                    </select>
+            </form>
+        </td>
+    </tr>
+</table>
+<tr>
+    	<form id="props_form" name="props_form" method="post" action="">
+        	<input type="button" name="props_btn"  id="props_btn" value="Show Properties"  onclick="dumpProps(playerOne)"/>
+        </form>
+        
+    	<textarea name="props_txt" id="props_txt" cols="50" rows="12" >PROPERTY LOGGER
+		</textarea>
+	</tr>
+
+<!-- Imports: -->
+	<script src="FAVideo.js" type="text/javascript"></script>
+    <script src="AC_RunActiveContent.js" type="text/javascript"></script>
+    <script type="text/javascript">
+	
+	// Instantiate Player
+    playerOne = new FAVideo("playerDiv");
+	
+	function addListeners(){
+		playerOne.addEventListener("init", this, init);
+		playerOne.addEventListener("progress", this, progress);
+		playerOne.addEventListener("playheadUpdate", this, playheadUpdate);
+		playerOne.addEventListener("stateChange", this, stateChange);
+		playerOne.addEventListener("change", this, change);
+		playerOne.addEventListener("complete", this, complete);
+		playerOne.addEventListener("ready", this, ready);
+		playerOne.addEventListener("metaData", this, metaData);
+		playerOne.addEventListener("cuePoint", this, cuePoint);
+	}
+	
+	function removeListeners(){
+		playerOne.removeEventListener("init", this, init);
+		playerOne.removeEventListener("progress", this, progress);
+		playerOne.removeEventListener("playheadUpdate", this, playheadUpdate);
+		playerOne.removeEventListener("stateChange", this, stateChange);
+		playerOne.removeEventListener("change", this, change);
+		playerOne.removeEventListener("complete", this, complete);
+		playerOne.removeEventListener("ready", this, ready);
+		playerOne.removeEventListener("metaData", this, metaData);
+		playerOne.removeEventListener("cuePoint", this, cuePoint);
+	}
+	
+	function setToggleClick(p_player, p_checked) {
+		p_player.setClickToTogglePlay(p_checked);
+	}
+	
+	
+	function showEvents(p_player, p_show) {
+		if(p_show == true) {
+			addListeners();
+		} else {
+			removeListeners()
+		}
+	}
+	
+	function init(p_event) {
+		out('init')
+		dump(p_event)
+	}
+	function progress(p_event) {
+		out('progress')
+		dump(p_event)
+	}
+	function playheadUpdate(p_event) {
+		out('playheadUpdate')
+		dump(p_event)
+	}
+	function stateChange(p_event) {
+		out('stateChange')
+		dump(p_event)
+	}
+	function change(p_event) {
+		out('change')
+		dump(p_event)
+	}
+	function complete(p_event) {
+		out('complete')
+		dump(p_event)
+	}
+	function ready(p_event) {
+		out('ready')
+		dump(p_event)
+	}
+	function metaData(p_event) {
+		out('metaData')
+		dump(p_event)
+	}
+	function cuePoint(p_event) {
+		out('cuePoint')
+		dump(p_event)
+	}
+	
+	isPlaying = false;
+	isMuted = false;
+	oldVolume = 50;
+	
+	function setSkinAutoHide(p_player, p_autoHide) {
+		p_player.setSkinAutoHide(p_autoHide);
+	}
+	
+	function setSkinVisible(p_player, p_vis) {
+		p_player.setSkinVisible(p_vis);
+	}  
+	
+	function load(p_player, p_url) {
+		p_player.load(p_url);
+	}
+	
+	function play(p_player, p_url) {
+		p_player.play(p_url);
+		isPlaying = true;
+		document.getElementById("controls_form").playPause_btn.value = "Pause";
+	}
+	
+	function setVolume(p_player, p_form) {
+		p_player.setVolume(p_form.volumeAmount.value);
+	}
+	
+	function setPreviewImage(p_player, p_image) {
+		p_player.setPreviewImagePath(p_image);
+	}
+	
+	function setSize(p_player, p_w, p_h) {
+		p_player.setSize(p_w, p_h);
+	}
+	
+	function setAutoLoad(p_player, p_autoLoad) {
+		p_player.setAutoLoad(p_autoLoad);
+	}
+	
+	function setAutoPlay(p_player, p_autoPlay) {
+		p_player.setAutoPlay(p_autoPlay);
+	}
+	
+	function changeSkin(p_player, p_form) { 
+		var skin = "skins/" + p_form.videoSkin.value;
+		p_player.setSkinPath(skin);
+	}
+	
+	function changeTheme(p_player, p_form) {
+		p_player.setThemeColor(p_form.themeColor.value)
+		
+	}
+	
+	function playPause(p_player, p_url) {
+		if(isPlaying == true) {
+			p_player.pause(true);
+			document.getElementById("playPause_btn").value = "Play";
+			isPlaying = false;
+		} else {
+			p_player.play(p_url);
+			document.getElementById("playPause_btn").value = "Pause";
+			isPlaying = true;
+		}
+	}
+	
+	function stopVideo(p_player) {
+		p_player.stop();
+		isPlaying = false;
+		document.getElementById("playPause_btn").value = "Play";
+	}
+	
+	function seek(p_player, p_seek) {
+		p_player.seek(p_player.getPlayheadTime() + p_seek);
+	}
+	
+	function mute(p_player) {
+		if(isMuted == false){
+			oldVolume = p_player.getVolume();
+			p_player.setVolume(0);
+			document.getElementById("mute_btn").value = "Unmute";
+			isMuted = true;
+		} else {
+			p_player.setVolume(oldVolume);
+			document.getElementById("mute_btn").value = "Mute";
+			isMuted = false;
+		}
+	}
+	
+	function changeAlignment(p_player, p_form) {
+		p_player.setVideoAlign(p_form.videoAlignment.value);
+	}
+	
+	function changeScaleMode(p_player, p_form) {
+		p_player.setVideoScaleMode(p_form.videoScaleMode.value);
+	}
+	
+	function out(p_message) {
+		document.getElementById("events_txt").value += "\n"
+		document.getElementById("events_txt").value += p_message
+	}
+	
+	function dump(p_obj) {
+		for(var prop in p_obj) {
+			out("\t"+ prop +": " + p_obj[prop]);
+		}
+	}
+	
+	function dumpProps(p_player) {
+		document.getElementById("props_txt").value = "";
+		document.getElementById("props_txt").value += "volume: " + p_player.getVolume() + "\n";
+		document.getElementById("props_txt").value += "autoPlay: " + p_player.getAutoPlay() + "\n";
+		document.getElementById("props_txt").value += "clickToTogglePlay: " + p_player.getClickToTogglePlay() + "\n";
+		document.getElementById("props_txt").value += "autoLoad: " + p_player.getAutoLoad() + "\n";
+		document.getElementById("props_txt").value += "skinAutoHide: " + p_player.getSkinAutoHide() + "\n";
+		document.getElementById("props_txt").value += "skinVisible: " + p_player.getSkinVisible() + "\n";
+		document.getElementById("props_txt").value += "playheadTime: " + p_player.getPlayheadTime() + "\n";
+		document.getElementById("props_txt").value += "totalTime: " + p_player.getTotalTime() + "\n";
+		document.getElementById("props_txt").value += "bufferTime: " + p_player.getBufferTime() + "\n";
+		document.getElementById("props_txt").value += "videoScaleMode: " + p_player.getVideoScaleMode() + "\n";
+		document.getElementById("props_txt").value += "videoAlign: " + p_player.getVideoAlign() + "\n";
+		document.getElementById("props_txt").value += "playheadUpdateInterval: " + p_player.getPlayheadUpdateInterval() + "\n";
+		document.getElementById("props_txt").value += "previewImagePath: " + p_player.getPreviewImagePath() + "\n";
+		document.getElementById("props_txt").value += "themeColor: " + p_player.getThemeColor() + "\n";
+		document.getElementById("props_txt").value += "skinPath: " + p_player.getSkinPath() + "\n";
+	}
+
+</script>
+</body>
+</html>

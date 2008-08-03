@@ -1,75 +1,23 @@
 !!!
-%style
-  :sass
-    !blue= #5599ee
-    !orange= #ee5599
-    !grey= #fafafa
-    !border= #ccc
-
-    *
-      :outline none
-
-    body, html
-      :margin 0px
-      :padding 0px
-    
-    body
-      :background-color= !grey
-      :padding 10px 40px
-
-    input, hr
-      :border-style outset
-
-    hr
-      :border-color= !border
-      :clear both
-      :margin-bottom 50px
-
-    h1 a
-      :text-decoration none
-
-    a
-      :color black
-
-    a:hover
-      :color= !blue !important
-      :text-decoration underline
-
-    .flash
-      :background-color= !blue + #454545
-      :padding 5px
-      :font-weight bold
-      :display inline
-      :color= !orange
-
-    .links
-      :list-style none
-      :clear both
-      :margin 0
-      :padding 0
-      :margin-top 20px
-
-      li
-        :float left
-        :position relative
-        :top 20px
-        :margin-bottom 10px
-
-        a
-          :text-decoration none
-          :background-color white
-          :padding 5px 10px
-
-        a:hover
-          :color= !blue
-          :background-color black
+%style	
 %html
   %head
     %title Friends' Jukebox Music-Player
+    %script{:src => "/json.js"}
     %script{:src => "/jquery-1.2.6.js"}
     %script{:src => "/jquery.form.js"}
     %script{:src => "/jquery-ui-personalized-1.5.2.packed.js"}
+    %script{:src => "/AC_RunActiveContent.js"}
+    %script{:src => "/FAVideo.js"}
+    %script{:src => "http://localhost:8001/static/TCPSocket.js"}
+    :javascript
+      ORBITED_PORT = 8001
+      ORBITED_DOMAIN = "localhost"
+
     %script{:src => "/application.js"}
+    %script{:src => "/legs.js"}
+
+    %link{:rel => "stylesheet", :href => "/main.css"}
     
   %body
     %h1 

@@ -1,3 +1,5 @@
+require 'bcrypt'
+
 class User < Sequel::Model(:users)
   include BCrypt
   

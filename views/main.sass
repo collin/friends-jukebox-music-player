@@ -1,0 +1,93 @@
+!blue= #5599ee
+!orange= #ee5599
+!grey= #fafafa
+!border= #ccc
+
+*
+  :outline none
+
+body, html
+  :margin 0px
+  :padding 0px
+
+body
+  :background-color= !grey
+  :padding 10px 40px
+
+input, hr
+  :border-style outset
+
+hr
+  :border-color= !border
+  :clear both
+  :margin-bottom 50px
+
+h1 a
+  :text-decoration none
+
+a
+  :color black
+
+a:hover
+  :color= !blue !important
+  :text-decoration underline
+
+.flash
+  :background-color= !blue + #454545
+  :padding 5px
+  :font-weight bold
+  :display inline
+  :color= !orange
+
+.links
+  :list-style none
+  :clear both
+  :margin 0
+  :padding 0
+  :margin-top 20px
+
+  li
+    :float left
+    :position relative
+    :top 20px
+    :margin-bottom 10px
+
+    a
+      :text-decoration none
+      :background-color white
+      :padding 5px 10px
+
+    a:hover
+      :background-color= !blue
+      :color black !important
+
+.chat
+  :border 1px outset black
+  :width 325
+  :position fixed
+  :bottom 25px
+  :right 25px
+  :padding 10px
+  :background-color white
+  .messages
+    :height 250px
+    :overflow auto
+    
+    blockquote
+      :width 250px
+
+    cite
+      :display block
+      :padding 0px 10px
+      :background-color= !grey
+
+      &.me
+        :text-align right
+
+.chat .messages, .friends ul
+  :list-style none
+  :margin 0
+  :padding 0
+
+#player
+  :visibility hidden

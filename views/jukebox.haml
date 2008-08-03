@@ -4,15 +4,31 @@
   and make some selections
 
 %form.song{:action => "/songs", :method => "post", :enctype=>"multipart/form-data"}
-  %input{:type=>"file", :name => "file", :value => ""}
+  %input{:type=>"file", :name => "file"}
   %input{:type=>"submit", :value=> ">"}
 
 %p Here's whats coming up:
 
 %ol.playlist
-  - 10.times do
+  - Song.each do |song|
     %li
       %p 
-        Crazy crazy song
+        %a{:href=> h(song.url)}= h song.url
         %em
           Collin
+
+/.friends
+/  %ul
+/    %li Joseph
+/    %li Quinn
+
+.chat
+  %form
+    %input.message{:type => "text", :default_value => "say something..."}
+    %input{:type => "submit", :value => "say it"}
+
+  %ol.messages
+
+#player
+      
+    

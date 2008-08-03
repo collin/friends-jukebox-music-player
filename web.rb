@@ -1,23 +1,16 @@
-require 'rubygems'
-require 'pathname'
-require 'sequel'
-require 'bcrypt'
-require 'tempfile'
-require 'uuid'
+require 'gen'
 
 __DIR__ = Pathname.new(__FILE__).dirname.expand_path
+APP_ROOT = __DIR__
 
 %w{sinatra jabs}.each do |lib|
   $:.unshift(__DIR__ + lib + 'lib')
   require lib
 end
 
-DB = Sequel.sqlite("database")
-Dir.glob(Pathname.new(__DIR__ + "models"+"*.rb")).each{|m| load m}
+use Rack::Session::Cookie, :key => SessionId
 
-use Rack::Session::Cookie, :key => "$2a$10$3fokcYU3K8geKYJA2bjB1"
-
-ClosedURLs = %w{
+closed_urls = %w{
   /jukebox
   /friends
   /player
@@ -28,12 +21,40 @@ ClosedURLs = %w{
 
 before do
   @current_user = User.find session[:user_id]
-  if ClosedURLs.include?(request.env["REQUEST_URI"])
+  if closed_urls.include?(request.env["REQUEST_URI"])
     unless @current_user
       session[:flash] = "Oh no+ what ?you to do? Sign in knave!"
       redirect "/"
     end
   end
+end
+
+get "/main.css" do
+  header 'Content-Type' => 'text/css; charset=utf-8'
+  sass :main
+end
+
+post "/songs" do
+  song =  request.env["rack.request.form_hash"]["file"]
+  name = song[:filename]
+  loc = song[:tempfile].path
+  x_loc = Tempfile.new("step").path
+
+  uuid = UUID.new
+
+# MP3 to the rescue
+#   system "mplayer -ao pcm \"#{loc}\" -ao pcm:file=\"#{x_loc}\" && nice oggenc -q0 \"#{x_loc}\" -o \"./public/songs/#{name}.ogg\"; rm \"#{loc}, #{x_loc}\""
+
+# FLV to the rescue
+#   system "mplayer -ao pcm \"#{loc}\" -ao pcm:file=\"#{x_loc}\" && nice lame -h -b 64 \"#{x_loc}\" \"./public/songs/#{uuid}.mp3\"; rm \"#{loc}, #{x_loc}\""
+
+  system "mplayer -ao pcm \"#{loc}\" -ao pcm:file=\"#{x_loc}\" && nice lame --resample 44.1 -h -b 64 \"#{x_loc}\" \"./public/songs/#{uuid}.mp3\"; rm \"#{loc}, #{x_loc}\""
+  
+  system "ffmpeg -i \"./public/songs/#{uuid}.mp3\" -acodec copy \"./public/songs/#{uuid}.flv\""
+
+  Song.create :url => "/songs/#{uuid}.flv"
+  session[:flash] = "Thanks for your song!"
+  redirect "/jukebox"
 end
 
 get "/" do
@@ -74,7 +95,7 @@ post "/signup" do
     session[:flash] = "Welcome to Friends' Jukebox Music Player"
     redirect "/jukebox"
   else
-#     @current_user = nil
+    @current_user = nil
     session[:flash] = "What went wrong? We want you to sign up!"
     redirect "/"
   end
@@ -98,13 +119,6 @@ delete "/signout" do
   session[:user_id] = 0
   session[:flash] = "Thanks for listening. Come back soon!"
   redirect "/"
-end
-
-post "/songs" do
-#   song = params["song"]
-#   temp = Tempfile.new("jukebox")
-#   name = "/songs/#{UUID.new}.ogg"
-  redirect "/jukebox"
 end
 
 def jabs target

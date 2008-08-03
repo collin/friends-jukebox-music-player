@@ -1235,7 +1235,12 @@ module Sinatra
         body = returned.to_result(context)
       end
       body = '' unless body.respond_to?(:each)
-      body = '' if request.request_method.upcase == 'HEAD'
+
+# Using request.env["REQUEST_METHOD"].upcase instead of:
+# request.request_method because it failed silently
+# in the example: http://gist.github.com/3261
+# when uploading a file matching "*.mp3
+      body = '' if request.env["REQUEST_METHOD"].upcase == 'HEAD'
       context.body = body.kind_of?(String) ? [*body] : body
       context.finish
     end

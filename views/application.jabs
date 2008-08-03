@@ -1,4 +1,9 @@
 :ready
+
+  window.player = new FAVideo("player", null,1,1,{autoLoad: false,autoPlay: true,skinVisible: false,clickToTogglePlay: false,bufferTime: 3,playheadUpdateInterval: 500,videoAlign: "center",volume: 50,videoScaleMode: "maintainAspectRatio"});
+
+  
+
   $input[default_value]
     :blur
       if @value === ''
@@ -35,5 +40,20 @@
     :click
       e.preventDefault()
       $form.signout
-        console.log("SIGNOUT")
         .submit()
+
+  $.chat form
+    :submit
+      e.preventDefault()
+      &.message
+        Legs.say(@value)
+        .focus()
+
+      .clearForm()
+
+  $.playlist a
+    :click
+      e.preventDefault()
+      player.play(@href)
+      $#player
+        .show().hide()
