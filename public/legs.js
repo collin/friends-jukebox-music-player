@@ -20,11 +20,20 @@ jQuery(function(){
       socket.send(JSON.stringify(payload)+"\r\n");
     }
     
-    socket.onread = function(data) {
-      jQuery(data.split("\n")).each(function(i, msg) {
-        rpc = JSON.parse(msg);
+    // Thanks http://github.com/Bluebie for the tip
+    // about making sure a full message has been
+    // send down the wire!
+    var in_buffer = "";
+    socket.onread = function(new_data) {
+      in_buffer = in_buffer + new_data;
+      splitted = in_buffer.split("\n", 2);
+      if (splitted.length == 1) {
+        return;
+      } else {
+        message = splitted[0]; in_buffer = splitted[1];
+        rpc = JSON.parse(message);
         if(remoteMethods[rpc.method]) remoteMethods[rpc.method].apply(null, rpc.params);
-      });
+      }
     };
   
     return {
