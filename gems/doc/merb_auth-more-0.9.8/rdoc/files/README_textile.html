@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: README.textile</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>README.textile</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>README.textile
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Tue Oct 07 01:04:28 -0500 2008</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+merb_auth-more
+</p>
+<h6>========</h6>
+<p>
+merb_auth-more provides stuff that&#8216;s useful, but not core to the
+functionality of merb_auth. Strategies and &quot;User&quot; object mixins
+are here.
+</p>
+<p>
+h3. What Strategies are there?
+</p>
+<p>
+Strategies are really simple to implement, but we&#8216;ve made some basic
+ones available.
+</p>
+<p>
+The built in ones are basic but should be enough to get you going for most
+things.
+</p>
+<p>
+To specify them, simply require them. For example,in lib/auth-strategies.rb
+</p>
+<p>
+&lt;pre&gt;&lt;code&gt; require
+&#8216;merb_auth-more/strategies/basic/password_form&#8217; require
+&#8216;merb_auth-more/strategies/basic/openid&#8216;
+</p>
+<p>
+class MyApiLogin &lt; ::Authentication::Strategy
+</p>
+<pre>
+  def run!
+    # check for api login
+  end
+</pre>
+<p>
+end &lt;/code&gt;&lt;/pre&gt;
+</p>
+<p>
+So far there are:
+</p>
+<ul>
+<li>basic/password_form
+
+</li>
+<li>basic/basic_auth
+
+</li>
+<li>basic/openid
+
+</li>
+</ul>
+<p>
+h3. &quot;User&quot; mixins
+</p>
+<p>
+To assist with your authenticating needs, there is user mixins available to
+enhance your user model for basic cases. These really are just for the
+basic case, so if you need something extra you should overwrite the
+methods, or implement (and share ;) ;) ) your requirements.
+</p>
+<p>
+To use these, require the specific mixin, and then include it into your
+&quot;User&quot; class.
+</p>
+<p>
+&lt;pre&gt;&lt;code&gt;
+</p>
+<pre>
+  require 'merb_auth-more/mixins/salted_user'
+
+  class User
+    include Authentication::Mixins::SaltedUser
+
+  end
+</pre>
+<p>
+&lt;/code&gt;&lt;/pre&gt;
+</p>
+<p>
+The salted user mixin provides basic salted SHA1 password authentication.
+It implements the required User.authenticate method for use with the
+default password strategies.
+</p>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

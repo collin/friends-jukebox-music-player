@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Authentication::Strategies::Basic::Form#run!
+is_singleton: false
+name: run!
+params: ()
+visibility: public

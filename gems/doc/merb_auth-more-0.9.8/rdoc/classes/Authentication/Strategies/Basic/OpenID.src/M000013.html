@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>run! (Authentication::Strategies::Basic::OpenID)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/merb_auth-more/strategies/basic/openid.rb, line 27</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run!</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value str">'openid.mode'</span><span class="ruby-value str">'openid.mode'</span>]
+            <span class="ruby-identifier">response</span> = <span class="ruby-identifier">consumer</span>.<span class="ruby-identifier">complete</span>(<span class="ruby-identifier">request</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:query_params</span>), <span class="ruby-node">&quot;#{request.protocol}://#{request.host}&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">path</span>)
+            <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">status</span>.<span class="ruby-identifier">to_s</span>
+            <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'success'</span>
+              <span class="ruby-identifier">sreg_response</span> = <span class="ruby-operator">::</span><span class="ruby-constant">OpenID</span><span class="ruby-operator">::</span><span class="ruby-constant">SReg</span><span class="ruby-operator">::</span><span class="ruby-constant">Response</span>.<span class="ruby-identifier">from_success_response</span>(<span class="ruby-identifier">response</span>)
+              <span class="ruby-identifier">result</span> = <span class="ruby-identifier">on_success!</span>(<span class="ruby-identifier">response</span>, <span class="ruby-identifier">sreg_response</span>)
+              <span class="ruby-constant">Merb</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span> <span class="ruby-node">&quot;\n\n#{result.inspect}\n\n&quot;</span>
+              <span class="ruby-identifier">result</span>
+            <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'failure'</span>
+              <span class="ruby-identifier">on_failure!</span>(<span class="ruby-identifier">response</span>)
+            <span class="ruby-keyword kw">when</span>  <span class="ruby-value str">'setup_needed'</span>
+              <span class="ruby-identifier">on_setup_needed!</span>(<span class="ruby-identifier">response</span>)
+            <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'cancel'</span>
+              <span class="ruby-identifier">on_cancel!</span>(<span class="ruby-identifier">response</span>)
+            <span class="ruby-keyword kw">end</span>
+          <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">identity_url</span> = <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:openid_url</span>]
+            <span class="ruby-keyword kw">begin</span>
+              <span class="ruby-identifier">openid_request</span> = <span class="ruby-identifier">consumer</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-identifier">identity_url</span>)
+              <span class="ruby-identifier">openid_reg</span> = <span class="ruby-operator">::</span><span class="ruby-constant">OpenID</span><span class="ruby-operator">::</span><span class="ruby-constant">SReg</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">new</span>
+              <span class="ruby-identifier">openid_reg</span>.<span class="ruby-identifier">request_fields</span>(<span class="ruby-identifier">required_reg_fields</span>)
+              <span class="ruby-identifier">openid_request</span>.<span class="ruby-identifier">add_extension</span>(<span class="ruby-identifier">openid_reg</span>)
+              <span class="ruby-identifier">redirect_to</span> = <span class="ruby-node">&quot;#{request.protocol}://#{request.host}#{Merb::Router.url(:openid)}&quot;</span>
+              <span class="ruby-identifier">redirect!</span>(<span class="ruby-identifier">openid_request</span>.<span class="ruby-identifier">redirect_url</span>(<span class="ruby-node">&quot;#{request.protocol}://#{request.host}&quot;</span>, <span class="ruby-identifier">redirect_to</span>))
+            <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">OpenID</span><span class="ruby-operator">::</span><span class="ruby-constant">OpenIDError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+              <span class="ruby-identifier">request</span>.<span class="ruby-identifier">session</span>.<span class="ruby-identifier">authentication</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">clear!</span>
+              <span class="ruby-identifier">request</span>.<span class="ruby-identifier">session</span>.<span class="ruby-identifier">authentication</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">:openid</span>, <span class="ruby-value str">'The OpenID verification failed'</span>)
+              <span class="ruby-keyword kw">nil</span>
+            <span class="ruby-keyword kw">end</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

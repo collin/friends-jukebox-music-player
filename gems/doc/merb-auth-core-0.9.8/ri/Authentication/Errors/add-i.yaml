@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Add a authentication error. Use the field_name :general if the errors does not apply to a specific field of the Resource.
+- !ruby/struct:SM::Flow::P 
+  body: "@param &lt;Symbol&gt; field_name the name of the field that caused the error @param &lt;String&gt; message the message to add"
+full_name: Authentication::Errors#add
+is_singleton: false
+name: add
+params: (field_name, message)
+visibility: public

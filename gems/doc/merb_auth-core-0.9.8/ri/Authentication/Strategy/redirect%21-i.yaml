@@ -1,0 +1,26 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Redirects causes the strategy to signal a redirect to the provided url.
+- !ruby/struct:SM::Flow::H 
+  level: 4
+  text: Parameters
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "url<String>:"
+    body: The url to redirect to
+  - !ruby/struct:SM::Flow::LI 
+    label: "options<Hash>:"
+    body: "An options hash with the following keys:"
+  type: :NOTE
+- !ruby/struct:SM::Flow::VERB 
+  body: "  +:permanent+ Set this to true to make the redirect permanent\n  +:status+ Set this to an integer for the status to return\n"
+full_name: Authentication::Strategy#redirect!
+is_singleton: false
+name: redirect!
+params: (url, opts = {})
+visibility: public

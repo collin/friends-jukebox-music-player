@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Use this to declare the strategy should run before another strategy
+full_name: Authentication::Strategy::before
+is_singleton: true
+name: before
+params: (strategy)
+visibility: public

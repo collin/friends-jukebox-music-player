@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: set the currently authenticated user manually Authentication#store_user should know how to store the object into the session
+full_name: Merb::Session::InstanceMethods#user=
+is_singleton: false
+name: user=
+params: (the_user)
+visibility: public

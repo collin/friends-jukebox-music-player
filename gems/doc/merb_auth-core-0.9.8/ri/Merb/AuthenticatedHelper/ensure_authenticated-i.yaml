@@ -1,0 +1,27 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: This is the main method to use as a before filter. You can call it with options and strategies to use. It will check if a user is logged in, and failing that will run through either specified.
+- !ruby/struct:SM::Flow::P 
+  body: "@params all are optional. A list of strategies, optionally followed by a options hash."
+- !ruby/struct:SM::Flow::P 
+  body: If used with no options, or only the hash, the default strategies will be used see Authentictaion.default_strategy_order.
+- !ruby/struct:SM::Flow::P 
+  body: If a list of strategies is passed in, the default strategies are ignored, and the passed in strategies are used in order until either one is found, or all fail.
+- !ruby/struct:SM::Flow::P 
+  body: A failed login will result in an Unauthenticated exception being raised.
+- !ruby/struct:SM::Flow::P 
+  body: Use the :message key in the options hash to pass in a failure message to the exception.
+- !ruby/struct:SM::Flow::H 
+  level: 3
+  text: Example
+- !ruby/struct:SM::Flow::VERB 
+  body: "   class MyController &lt; Application\n     before :ensure_authenticated, :with =&gt; [OpenID,FormPassword, :message =&gt; &quot;Failz!&quot;]\n      #... &lt;snip&gt;\n   end\n"
+full_name: Merb::AuthenticatedHelper#ensure_authenticated
+is_singleton: false
+name: ensure_authenticated
+params: (*strategies)
+visibility: protected

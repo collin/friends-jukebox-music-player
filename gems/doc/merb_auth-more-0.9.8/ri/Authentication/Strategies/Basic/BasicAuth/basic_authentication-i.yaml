@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Need to overwrite this method so that we can pass in the request instead of a the strategy which is what the mixin would do.
+full_name: Authentication::Strategies::Basic::BasicAuth#basic_authentication
+is_singleton: false
+name: basic_authentication
+params: (realm = "Application", &authenticator)
+visibility: public

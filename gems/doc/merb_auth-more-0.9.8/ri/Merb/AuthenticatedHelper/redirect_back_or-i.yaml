@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Add a helper to do the redirect_back_or for you. Also tidies up the session afterwards If there has been a failed login attempt on some page using this method you'll be redirected back to that page. Otherwise redirect to the default_url
+- !ruby/struct:SM::Flow::P 
+  body: To make sure you're not redirected back to the login page after a failed then successful login, you can include an ignore url. Basically, if the return url == the ignore url go to the default_url
+- !ruby/struct:SM::Flow::P 
+  body: set the ignore url via an :ignore option in the opts hash.
+full_name: Merb::AuthenticatedHelper#redirect_back_or
+is_singleton: false
+name: redirect_back_or
+params: (default_url, opts = {})
+visibility: public

@@ -1,0 +1,19 @@
+%h1 Welcome to The Friends' JukeBox Music Player!
+%ul
+  %li
+    == You have #{@current_user.friends.count} friends to crowd around the JukeBox with.
+    %ul
+      =partial 'friends/buddy', :with => @current_user.friends
+  -if @current_user.requests.any?
+    %li
+      == #{@current_user.requests.count} people want to be your friend,
+      %ul
+        =partial 'friends/buddy', :with => @current_user.requests
+  -if @current_user.pendings.any?
+    %li
+      == and you're waiting to hear back from #{@current_user.pendings.count} people.
+      %ul
+        =partial 'friends/buddy', :with => @current_user.pendings
+  -if @current_user.others.any?
+    =link_to url(:friends), "People you have no affilation with"
+  

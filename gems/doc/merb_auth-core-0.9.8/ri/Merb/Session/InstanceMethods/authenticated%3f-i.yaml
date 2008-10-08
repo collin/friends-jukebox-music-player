@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Check to see if the current session is authenticated @return true if authenticated. false otherwise
+full_name: Merb::Session::InstanceMethods#authenticated?
+is_singleton: false
+name: authenticated?
+params: ()
+visibility: public

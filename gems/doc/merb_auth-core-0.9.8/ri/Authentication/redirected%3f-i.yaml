@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Authentication#redirected?
+is_singleton: false
+name: redirected?
+params: ()
+visibility: public

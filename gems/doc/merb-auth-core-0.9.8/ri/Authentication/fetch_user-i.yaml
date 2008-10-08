@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Tells the framework how to reconstitute a user from the data stored by store_user.
+- !ruby/struct:SM::Flow::P 
+  body: You must overwrite this method for user in your projects. Slices and plugins may set this.
+- !ruby/struct:SM::Flow::P 
+  body: "@api overwritable"
+full_name: Authentication#fetch_user
+is_singleton: false
+name: fetch_user
+params: (session_contents = session[:user])
+visibility: public

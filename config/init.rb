@@ -37,18 +37,22 @@
 # If you want modules and classes from libraries organized like
 # merbapp/lib/magicwand/lib/magicwand.rb to autoload,
 # uncomment this.
-# Merb.push_path(:lib, Merb.root / "lib") # uses **/*.rb as path glob.
-
 # ==== Dependencies
 
 # These are a few, but not all, of the standard merb-more dependencies:
 #
 # dependency "merb-action-args"   # Provides support for querystring arguments to be passed in to controller actions
 # dependency "merb-assets"        # Provides link_to, asset_path, auto_link, image_tag methods (and lots more)
- dependency "merb-helpers"       # Provides the form, date/time, and other helpers
+ dependency "merb_helpers"       # Provides the form, date/time, and other helpers
 # dependency "merb-cache"         # Provides your application with caching functions 
 dependency "merb-haml"          # Adds rake tasks and the haml generators to your merb app
 dependency "merb-jquery"        # Provides a #jquery method to insert jQuery code in to a content block
+dependency "merb-slices"  
+dependency "merb_auth-core"
+dependency "merb_auth-more"
+dependency "highline" 
+dependency "colored"   
+dependency "merb_has_flash"   
 # dependency "merb-mailer"        # Integrates mail support via Merb Mailer
 
 # These are a few, but not all, of the merb-plugin dependencies:
@@ -68,6 +72,10 @@ dependency "merb-jquery"        # Provides a #jquery method to insert jQuery cod
 # dependencies "RedCloth" => "> 3.0", "BlueCloth" => "= 1.0.0"
 
 # You can also add in dependencies after your application loads.
+Merb::BootLoader.before_app_loads do
+  Merb::Slices::config[:merb_auth][:layout] = :application
+end
+
 Merb::BootLoader.after_app_loads do
   # For example, the magic_admin gem uses the app's model classes. This requires that the models be 
   # loaded already. So, we can put the magic_admin dependency here:
@@ -134,7 +142,7 @@ use_template_engine :haml
 Merb::Config.use do |c|
   # Sets up a custom session id key which is used for the session persistence
   # cookie name.  If not specified, defaults to '_session_id'.
-  # c[:session_id_key] = '_session_id'
+  c[:session_id_key] = 'friends_jukebox_session_id'
   
   # The session_secret_key is only required for the cookie session store.
   c[:session_secret_key]  = '4ea8d35a3818dbd643aad121f8bcfa2466ad5522'
@@ -144,6 +152,7 @@ Merb::Config.use do |c|
   # You can of course use your favorite ORM instead: 
   # 'datamapper', 'sequel' or 'activerecord'.
   c[:session_store] = 'cookie'
+  c[:log_file] = Merb.root+'/log/merb.log'
 end
 
 

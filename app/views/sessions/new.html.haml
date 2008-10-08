@@ -1,0 +1,5 @@
+=error_messages_for @session, nil, "Bad password/email combination"
+-form_for :session, :action => url(:sessions), :method => :post do
+  =text_control :email, :label => "Email"
+  =password_control :password, :label => "Password"
+  =submit_button "Sign In"

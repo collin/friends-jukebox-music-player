@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Authentication::Strategy</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Authentication::Strategy</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/lib/merb-auth-core/strategy_rb.html">
+                lib/merb-auth-core/strategy.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Object
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+The <a href="Strategy.html">Authentication::Strategy</a> is where all the
+action happens in the merb-auth framework. Inherit from this class to setup
+your own strategy. The strategy will automatically be placed in the
+default_strategy_order array, and will be included in the strategy runs.
+</p>
+<p>
+The strategy you implment should have a YourStrategy#run! method defined
+that returns
+</p>
+<pre>
+  1. A user object if authenticated
+  2. nil if no authenticated user was found.
+</pre>
+<h3>Example</h3>
+<pre>
+   class MyStrategy &lt; Authentication::Strategy
+     def run!
+       u = User.get(params[:login])
+       u if u.authentic?(params[:password])
+     end
+   end
+</pre>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000023">abstract!</a>&nbsp;&nbsp;
+      <a href="#M000024">abstract?</a>&nbsp;&nbsp;
+      <a href="#M000022">after</a>&nbsp;&nbsp;
+      <a href="#M000021">before</a>&nbsp;&nbsp;
+      <a href="#M000027">cookies</a>&nbsp;&nbsp;
+      <a href="#M000020">inherited</a>&nbsp;&nbsp;
+      <a href="#M000025">new</a>&nbsp;&nbsp;
+      <a href="#M000026">params</a>&nbsp;&nbsp;
+      <a href="#M000029">run!</a>&nbsp;&nbsp;
+      <a href="#M000028">session</a>&nbsp;&nbsp;
+      <a href="#M000030">user_class</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">request</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000023" class="method-detail">
+        <a name="M000023"></a>
+
+        <div class="method-heading">
+          <a href="Strategy.src/M000023.html" target="Code" class="method-signature"
+            onclick="popupCode('Strategy.src/M000023.html');return false;">
+          <span class="method-name">abstract!</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Mark a strategy as abstract. This means that a strategy will not ever be
+run as part of the authentication. Instead this will be available to
+inherit from as a way to share code.
+</p>
+<p>
+You could for example setup a strategy to check for a particular kind of
+login and then have a subclass for each class type of user in your system.
+i.e. Customer / Staff, Student / Staff etc
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000024" class="method-detail">
+        <a name="M000024"></a>
+
+        <div class="method-heading">
+          <a href="Strategy.src/M000024.html" target="Code" class="method-signature"
+            onclick="popupCode('Strategy.src/M000024.html');return false;">
+          <span class="method-name">abstract?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Asks is this strategy abstract. i.e. can it be run as part of the
+authentication
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000022" class="method-detail">
+        <a name="M000022"></a>
+
+        <div class="method-heading">
+          <a href="Strategy.src/M000022.html" target="Code" class="method-signature"
+            onclick="popupCode('Strategy.src/M000022.html');return false;">
+          <span class="method-name">after</span><span class="method-args">(strategy)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Use this to declare the strategy should run <a
+href="Strategy.html#M000022">after</a> another strategy
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000021" class="method-detail">
+        <a name="M000021"></a>
+
+        <div class="method-heading">
+          <a href="Strategy.src/M000021.html" target="Code" class="method-signature"
+            onclick="popupCode('Strategy.src/M000021.html');return false;">
+          <span class="method-name">before</span><span class="method-args">(strategy)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Use this to declare the strategy should run <a
+href="Strategy.html#M000021">before</a> another strategy
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000020" class="method-detail">
+        <a name="M000020"></a>
+
+        <div class="method-heading">
+          <a href="Strategy.src/M000020.html" target="Code" class="method-signature"
+            onclick="popupCode('Strategy.src/M000020.html');return false;">
+          <span class="method-name">inherited</span><span class="method-args">(klass)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000025" class="method-detail">
+        <a name="M000025"></a>
+
+        <div class="method-heading">
+          <a href="Strategy.src/M000025.html" target="Code" class="method-signature"
+            onclick="popupCode('Strategy.src/M000025.html');return false;">
+          <span class="method-name">new</span><span class="method-args">(request)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000027" class="method-detail">
+        <a name="M000027"></a>
+
+        <div class="method-heading">
+          <a href="Strategy.src/M000027.html" target="Code" class="method-signature"
+            onclick="popupCode('Strategy.src/M000027.html');return false;">
+          <span class="method-name">cookies</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+An alials to the request.cookies hash
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000026" class="method-detail">
+        <a name="M000026"></a>
+
+        <div class="method-heading">
+          <a href="Strategy.src/M000026.html" target="Code" class="method-signature"
+            onclick="popupCode('Strategy.src/M000026.html');return false;">
+          <span class="method-name">params</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+An alias to the request.params hash
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000029" class="method-detail">
+        <a name="M000029"></a>
+
+        <div class="method-heading">
+          <a href="Strategy.src/M000029.html" target="Code" class="method-signature"
+            onclick="popupCode('Strategy.src/M000029.html');return false;">
+          <span class="method-name">run!</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This is the method that is called as the test for authentication and is
+where you put your code.
+</p>
+<p>
+You must overwrite this method in your strategy
+</p>
+<p>
+@api overwritable
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000028" class="method-detail">
+        <a name="M000028"></a>
+
+        <div class="method-heading">
+          <a href="Strategy.src/M000028.html" target="Code" class="method-signature"
+            onclick="popupCode('Strategy.src/M000028.html');return false;">
+          <span class="method-name">session</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+An alias to the request.session hash
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000030" class="method-detail">
+        <a name="M000030"></a>
+
+        <div class="method-heading">
+          <a href="Strategy.src/M000030.html" target="Code" class="method-signature"
+            onclick="popupCode('Strategy.src/M000030.html');return false;">
+          <span class="method-name">user_class</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Overwrite this method to scope a strategy to a particular user type you can
+use this with inheritance for example to try the same strategy on different
+user types
+</p>
+<p>
+By default, <a
+href="../Authentication.html#M000001">Authentication.user_class</a> is
+used. This method allows for particular strategies to deal with a different
+type of user class.
+</p>
+<p>
+For example. If <a
+href="../Authentication.html#M000001">Authentication.user_class</a> is
+Customer and you have a PasswordStrategy, you can subclass the
+PasswordStrategy and change this method to return Staff. Giving you a
+PasswordStrategy strategy for first Customer(s) and then Staff.
+</p>
+<p>
+@api overwritable
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

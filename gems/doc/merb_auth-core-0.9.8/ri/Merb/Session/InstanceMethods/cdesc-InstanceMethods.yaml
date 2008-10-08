@@ -1,0 +1,26 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: Merb::Session::InstanceMethods
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: abandon!
+- !ruby/object:RI::MethodSummary 
+  name: authenticate!
+- !ruby/object:RI::MethodSummary 
+  name: authenticated?
+- !ruby/object:RI::MethodSummary 
+  name: authentication
+- !ruby/object:RI::MethodSummary 
+  name: user
+- !ruby/object:RI::MethodSummary 
+  name: user=
+name: InstanceMethods
+superclass: 

@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Tells the framework how to store your user object into the session so that it can be re-created on the next login. You must overwrite this method for use in your projects. Slices and plugins may set this.
+- !ruby/struct:SM::Flow::P 
+  body: "@api overwritable"
+full_name: Authentication#store_user
+is_singleton: false
+name: store_user
+params: (user)
+visibility: public

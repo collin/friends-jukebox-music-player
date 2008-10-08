@@ -1,0 +1,30 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: Authentication::Strategies::Basic::OpenID
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: find_user_by_identity_url
+- !ruby/object:RI::MethodSummary 
+  name: on_cancel!
+- !ruby/object:RI::MethodSummary 
+  name: on_failure!
+- !ruby/object:RI::MethodSummary 
+  name: on_setup_needed!
+- !ruby/object:RI::MethodSummary 
+  name: on_success!
+- !ruby/object:RI::MethodSummary 
+  name: openid_store
+- !ruby/object:RI::MethodSummary 
+  name: required_reg_fields
+- !ruby/object:RI::MethodSummary 
+  name: run!
+name: OpenID
+superclass: Base

@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Asks is this strategy abstract. i.e. can it be run as part of the authentication
+full_name: Authentication::Strategy::abstract?
+is_singleton: true
+name: abstract?
+params: ()
+visibility: public

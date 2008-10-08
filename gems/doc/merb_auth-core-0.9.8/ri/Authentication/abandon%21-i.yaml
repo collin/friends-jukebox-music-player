@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "&quot;Logs Out&quot; a user from the session. Also clears out all session data"
+full_name: Authentication#abandon!
+is_singleton: false
+name: abandon!
+params: ()
+visibility: public

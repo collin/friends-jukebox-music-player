@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Use this to set the default order of strategies if you need to in your application. You don't need to use all avaiable strategies in this array, but you may not include a strategy that has not yet been defined.
+- !ruby/struct:SM::Flow::P 
+  body: "@params [Authentiation::Strategy,Authentication::Strategy]"
+full_name: Authentication::default_strategy_order=
+is_singleton: true
+name: default_strategy_order=
+params: (*order)
+visibility: public

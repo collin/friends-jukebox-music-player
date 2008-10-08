@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: README.textile</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>README.textile</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>README.textile
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Tue Oct 07 01:03:30 -0500 2008</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+h2. merb_auth-core
+</p>
+<p>
+MerbAuth is a very <em>unopinionated</em> authentication framework for use
+with the <a href="../classes/Merb.html">Merb</a> web framework.
+</p>
+<p>
+MerbAuth does not try to dictate what you should use as a user type model,
+or how it should authenticate. Instead it focuses on the logic required to
+check that an object passes authentication, and store authenticated objects
+in the session. This is in fact the guiding principle of MerbAuth. The
+controller is not the place that an authenticated user of the system should
+live. A controller is for directing traffic. Instead, the session is used
+as the place for authentication, with a sprinkling of controller helpers.
+For example, inside your controller:
+</p>
+<ul>
+<li>session.authenticated? returns true if the session has been authenticated.
+False otherwise # session.authenticate(controller) authenticates the
+session based on customizable user defined rules
+
+</li>
+<li>session.user returns the currently authenticated user object
+
+</li>
+<li>session.user= manually sets the currently authenticated user object
+
+</li>
+<li>session.abandon!
+
+</li>
+</ul>
+<p>
+sets the session to unauthenticated, and clears all session data
+</p>
+<p>
+MerbAuth makes use of <a href="../classes/Merb.html">Merb</a>&#8216;s
+exception handling facilities which return correct HTTP status codes when a
+200 OK would be inappropriate. To fail a login, or to force a login at any
+point in your controller code, simply raise an Unauthenticated exception,
+with an optional message and the user will be taken to the login page.
+</p>
+<p>
+To protect your controllers, add a simple @before@ filter to your
+controller.
+</p>
+<p>
+<tt> before :ensure_authenticated </tt>
+</p>
+<p>
+It is possible to use MerbAuth with any object type as a <em>user</em>
+object, provided that object does not evaluate to false and it can be
+retrieved with @key@. For this reason, merb_auth-core does not try to
+implement even a simple login form for you, since it may not be to your
+liking.
+</p>
+<p>
+h3. How Does It Authenticate my arbitrary user?
+</p>
+<p>
+This is very similar to the BootLoader process in Merbs initialization. You
+declare a class that inherits from <a
+href="../classes/Authentication/Strategy.html">Authentication::Strategy</a>
+and define an instance method @run!@
+</p>
+<p>
+&lt;pre&gt;&lt;code&gt;
+</p>
+<pre>
+  class PasswordStrategy &amp;lt Authentication::Strategy
+
+    def run!
+      if params[:login] &amp;&amp; params[:password]
+        user_class.authenticate(params[:login], params[:password])
+      end
+    end
+  end
+</pre>
+<p>
+&lt;/code&gt;&lt;/pre&gt;
+</p>
+<p>
+bq. This login strategy uses the @authenticate@ finder on the User class to
+retrieve a user by @login@ and @password@. Remember, you can put as much
+logic here as you require.
+</p>
+<p>
+The strategy provides access to the current controller giving you access to
+the params hash, request, session etc.
+</p>
+<p>
+To pass authentication, simply return a non-nil non-false object at the end
+of the @run!@ method. Any false or nil value will cause that strategy to
+fail. Then the next one will be tried :) wait&#8230; what?
+</p>
+<p>
+You can add as many strategies as you like and they will be tried one after
+another until either one is found that works (login), or none of them have
+passed (failed attempt).
+</p>
+<p>
+&lt;pre&gt;&lt;code&gt;
+</p>
+<pre>
+    class PasswordLoginBasicAuth &amp;lt Authentication::Strategy
+      def run!
+        if controller.basic_authentication.provided?
+          controller.basic_authentication.authenticate do |login, password|
+            user = user_class.authenticate(login, password)
+            unless user
+              controller.basic_authentication.request!
+              throw(:halt, &quot;Login Required&quot;)
+            end
+            user
+          end
+        end
+      end
+    end
+</pre>
+<p>
+&lt;/code&gt;&lt;/pre&gt;
+</p>
+<p>
+Now that we have two, they will be executed in the order that they were
+declared when we call @session.authenticate!(self)@. The first one that
+returns a value that doesn&#8216;t evaluate to false, will be considered
+the winner.
+</p>
+<p>
+h3. Customizing the user_class
+</p>
+<p>
+Notice the @user_class@ method in the above strategy examples. This is a
+convenience method on a strategy to provide you with the user_class to use
+for this strategy. You can overwrite this method on a per strategy basis to
+use different user model types.
+</p>
+<p>
+By default the strategy#user_class method will defer to <a
+href="../classes/Authentication.html#M000001">Authentication#user_class</a>
+so you can overwrite this method to set the default user class for your
+application if required. The default value is @User@
+</p>
+<p>
+h3. Strategies and Inheritance
+</p>
+<p>
+Strategies may be inherited multiple times to make the job of combining
+similar aspects easier. You can inherit as many levels as you like and at
+any point you may mark a strategy as <em>abstract</em>
+</p>
+<p>
+An abstract strategy just means that it will not be run when it comes time
+to authenticate. Instead it&#8216;s good to put common logic in and then
+inherit from.
+</p>
+<p>
+To mark a class as abstract, use the @abstract!@ class method.
+</p>
+<p>
+&lt;pre&gt;&lt;code&gt;
+</p>
+<pre>
+  class AbstractStrategy &lt; Authentication::Strategy
+    abstract!
+  end
+</pre>
+<p>
+&lt;/code&gt;&lt;/pre&gt;
+</p>
+<p>
+h3. Customizing the order of the strategies
+</p>
+<p>
+By default, strategies are run in the order they are declared. It&#8216;s
+possible to customize the order that the strategies are called.
+</p>
+<p>
+@Authentication.default_strategy_order@ will return an array of the
+strategy classes in the order that they will be run. You can customize this
+by setting the default_strategy_order array manually.
+</p>
+<p>
+@Authenticateion.default_strategy_order.order = [Second, First, Fourth]@
+</p>
+<p>
+It&#8216;s possible to leave some out, and re-order existing ones. It will
+error out if you specify one that doesn&#8216;t exist though.
+</p>
+<p>
+h3. Specifying selected strategies per action
+</p>
+<p>
+It&#8216;s possible to configure each call to @ensure_authenticated@ with a
+custom list of strategies to run. These will be run in order and should
+have an instance method of run!
+</p>
+<p>
+&lt;pre&gt;&lt;code&gt;
+</p>
+<pre>
+  class ApiMethods &lt; Application
+    before :ensure_authenticated, :with =&gt; [
+                                            Authenticated::BasicAuth,
+                                            Authenticated::OpenID,
+                                            Authenticated::OAuth
+                                           ]
+    before :machine_only, :only =&gt; [:create]
+
+    def index
+      display @stuff
+    end
+
+    def create
+      stuff = Stuff.create(params[:stuff])
+      display stuff
+    end
+
+    private
+    def machine_only
+      ensure_authentiated Authenticated::Oauth, Authenticated::BasicAuth
+    end
+  end
+</pre>
+<p>
+&lt;/code&gt;&lt;/pre&gt;
+</p>
+<p>
+You can see in this example that you can specify a list of strategies to
+use. These will be executed in the order of the array passed in, with the
+default order ignored completely.
+</p>
+<p>
+h3. Where should Strategies be defined?
+</p>
+<p>
+So far the thinking is that strategies should be setup in a directory for
+this purpose.
+</p>
+<p>
+lib/strategies/
+</p>
+<p>
+This is a good place to put everything together so you can see what
+you&#8216;re doing at a glance.
+</p>
+<p>
+h3. What Strategies are there?
+</p>
+<p>
+See merb_auth-more
+</p>
+<p>
+h3. Storing you user object into the session
+</p>
+<p>
+You need to tell MerbAuth how to represent your user object in the session
+data store, and also how to reconstruct it from that data. You don&#8216;t
+want to store complex objects in the session if you can avoid it.
+</p>
+<p>
+To configure your user object to go in and out of the session, here&#8216;s
+how you could do it.
+</p>
+<p>
+&lt;pre&gt;&lt;code&gt;
+</p>
+<pre>
+    class Authentication
+
+      # return the value you want stored in the session
+      def store_user(user)
+        return nil unless user
+        user.id
+      end
+
+      # session info is the data you stored in the session previously
+      def fetch_user(session_info)
+        User.get(session_info)
+      end
+    end
+</pre>
+<p>
+&lt;/code&gt;&lt;/pre&gt;
+</p>
+<p>
+h3. Providing feedback to users (Error Messages)
+</p>
+<p>
+There&#8216;s at least 4 ways to provide feedback to users for failed
+logins.
+</p>
+<ul>
+<li>Overwrite <a
+href="../classes/Authentication.html#M000008">Authentication#error_message</a>
+The return of this method is the default message that is passed to the
+Unauthenticated exception. Overwrite this to provide a very basic catch all
+message.
+
+</li>
+<li>Provide a default message when you declare your before filter.
+&lt;pre&gt;&lt;code&gt;
+
+<pre>
+  before :ensure_authenticated, :with =&gt; [Openid, :message =&gt; &quot;Could not log you in with open ID&quot;]
+  # OR
+  before :ensure_authentication, :with =&gt; {:message =&gt; &quot;Sorry Buddy... You Lose&quot;}
+</pre>
+<p>
+&lt;/code&gt;&lt;/pre&gt; When you pass a message, it will replace the <a
+href="../classes/Authentication.html#M000008">Authentication#error_message</a>
+default for this action
+</p>
+</li>
+<li>Use an after filter for your login action. This can be used to set your
+messaging system. For example: &lt;pre&gt;&lt;code&gt;
+
+<pre>
+  after :set_login_message, :only =&gt; [:create]
+
+  private
+  def set_login_message
+    if session.authenticated?
+      flash[:message] = &quot;Welcome&quot;
+    else
+      flash[:error] = &quot;Bad.. You Fail&quot;
+    end
+  end
+</pre>
+<p>
+&lt;/code&gt;&lt;/pre&gt;
+</p>
+</li>
+<li>Use the authentications error messaging inside your strategies to set error
+messages there. You can add to these errors just like adding to DataMappers
+validation errors. (That&#8216;s where they come from)
+
+<p>
+&lt;pre&gt;&lt;code&gt;
+</p>
+<pre>
+  session.authentication.errors.add(&quot;Label&quot;, &quot;You Fail&quot;)
+</pre>
+<p>
+&lt;/code&gt;&lt;/pre&gt; Add as many as you like, ask
+@session.authentication.errors.on(:label)@ to get specific errors etc
+Really&#8230; They&#8216;re just like the DataMapper validation errors. The
+bonus of using this system is that you can add messages inside your
+Strategies, and also in your views you can do this: &lt;pre&gt;&lt;code&gt;
+</p>
+<pre>
+  &lt;%= error_messages_for sessions.authentication %&gt;
+</pre>
+<p>
+&lt;/pre&gt;&lt;/code&gt;
+</p>
+</li>
+</ul>
+<p>
+h3. Additional checks / actions to perform after the user is found
+</p>
+<p>
+Sometimes you may need to perform additional operations on the user object
+before or after you grab it out of the database when authenticating it. The
+<a href="../classes/Authentication.html">Authentication</a> class
+implements Extlib::Hook so you can just setup hooks to deal with this.
+</p>
+<p>
+Here&#8216;s an example of checking that a user object is active after
+it&#8216;s been found:
+</p>
+<pre>
+  after :authenticate! do |instance, *args|
+    raise Merb::Controller::Unauthenticated, &quot;User Not Active&quot; unless instance.user.active?
+  end
+</pre>
+<p>
+bq. Notice that to fail the check we raised an Unauthenticated exception.
+The session is available in that block as <tt>session</tt>
+</p>
+<p>
+Really that&#8216;s all there is to it. By default this plugin
+doesn&#8216;t actually authenticate anything ;) It&#8216;s up to you to get
+your model going, and add an authentication strategy. Just remember that to
+login, you just use @session.authenticate(request)@ inside a controller. To
+logout use @session.abandon!@ and to force a login at any time use @raise
+Unauthenticated, &quot;You Aren&#8216;t Cool Enough&quot;@ Be aware that
+strategies may throw :halt for use as a before filter&#8230;
+</p>
+<p>
+h3. Contributors
+</p>
+<p>
+# Adam French - &quot;<a
+href="http://adam.speaksoutofturn.com/":http://adam.speaksoutofturn.com">adam.speaksoutofturn.com/":http://adam.speaksoutofturn.com</a>/
+# Daniel Neighman - &quot;<a
+href="http://merbunity.com":http://merbunity.com">merbunity.com":http://merbunity.com</a>
+# Ben Burket - &quot;<a
+href="http://benburkert.com/":http://benburkert.com">benburkert.com/":http://benburkert.com</a>/
+</p>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>on_success! (Authentication::Strategies::Basic::OpenID)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/merb_auth-more/strategies/basic/openid.rb, line 63</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">on_success!</span>(<span class="ruby-identifier">response</span>, <span class="ruby-identifier">sreg_response</span>)
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">user</span> = <span class="ruby-identifier">find_user_by_identity_url</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">identity_url</span>)
+            <span class="ruby-identifier">user</span>
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-identifier">request</span>.<span class="ruby-identifier">session</span>[<span class="ruby-value str">'openid.url'</span><span class="ruby-value str">'openid.url'</span>] = <span class="ruby-identifier">response</span>.<span class="ruby-identifier">identity_url</span>
+            <span class="ruby-identifier">required_reg_fields</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+              <span class="ruby-identifier">session</span>[<span class="ruby-node">&quot;openid.#{f}&quot;</span><span class="ruby-node">&quot;openid.#{f}&quot;</span>] = <span class="ruby-identifier">sreg_response</span>.<span class="ruby-identifier">data</span>[<span class="ruby-identifier">f</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">sreg_response</span>.<span class="ruby-identifier">data</span>[<span class="ruby-identifier">f</span>]
+            <span class="ruby-keyword kw">end</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">sreg_response</span>
+            <span class="ruby-identifier">redirect!</span>(<span class="ruby-constant">Merb</span><span class="ruby-operator">::</span><span class="ruby-constant">Router</span>.<span class="ruby-identifier">url</span>(<span class="ruby-identifier">:signup</span>))
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

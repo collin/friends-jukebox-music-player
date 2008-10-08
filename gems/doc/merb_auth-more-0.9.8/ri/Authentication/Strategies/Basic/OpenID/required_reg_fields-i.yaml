@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "@api overwritable"
+full_name: Authentication::Strategies::Basic::OpenID#required_reg_fields
+is_singleton: false
+name: required_reg_fields
+params: ()
+visibility: public

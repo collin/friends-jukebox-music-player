@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: Merb::AuthenticatedHelper</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">Merb::AuthenticatedHelper</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/lib/merb-auth-core/authenticated_helper_rb.html">
+                lib/merb-auth-core/authenticated_helper.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000031">ensure_authenticated</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Protected Instance methods</h3>
+
+      <div id="method-M000031" class="method-detail">
+        <a name="M000031"></a>
+
+        <div class="method-heading">
+          <a href="AuthenticatedHelper.src/M000031.html" target="Code" class="method-signature"
+            onclick="popupCode('AuthenticatedHelper.src/M000031.html');return false;">
+          <span class="method-name">ensure_authenticated</span><span class="method-args">(*strategies)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This is the main method to use as a before filter. You can call it with
+options and strategies to use. It will check if a user is logged in, and
+failing that will run through either specified.
+</p>
+<p>
+@params all are optional. A list of strategies, optionally followed by a
+options hash.
+</p>
+<p>
+If used with no options, or only the hash, the default strategies will be
+used see Authentictaion.default_strategy_order.
+</p>
+<p>
+If a list of strategies is passed in, the default strategies are ignored,
+and the passed in strategies are used in order until either one is found,
+or all fail.
+</p>
+<p>
+A failed login will result in an Unauthenticated exception being raised.
+</p>
+<p>
+Use the :message key in the options hash to pass in a failure message to
+the exception.
+</p>
+<h3>Example</h3>
+<pre>
+   class MyController &lt; Application
+     before :ensure_authenticated, :with =&gt; [OpenID,FormPassword, :message =&gt; &quot;Failz!&quot;]
+      #... &lt;snip&gt;
+   end
+</pre>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+!!!
+%html
+  %head
+    %title Friends JukeBox Music Player
+    %script{:type=>"text/javascript", :src=>"/javascripts/json2.js"}
+    %script{:type=>"text/javascript", :src=>"/javascripts/jquery-1.2.6.js"}
+    %script{:type=>"text/javascript", :src=>"/javascripts/app.js"}
+    -if logged_in?
+      :javascript
+        var current_user = #{@current_user.public_json}
+        
+  %body
+    -if logged_in?
+      %h1== Hello #{@current_user.name}
+      
+    -if flash[:notice]
+      %p.flash= h flash[:notice]
+     
+    =catch_content

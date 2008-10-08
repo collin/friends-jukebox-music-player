@@ -1,0 +1,17 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: extended
+comment: 
+constants: []
+
+full_name: Authentication::Mixins::SaltedUser::DMClassMethods
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: authenticate
+name: DMClassMethods
+superclass: 

@@ -1,0 +1,18 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Overwrite this method to scope a strategy to a particular user type you can use this with inheritance for example to try the same strategy on different user types
+- !ruby/struct:SM::Flow::P 
+  body: By default, Authentication.user_class is used. This method allows for particular strategies to deal with a different type of user class.
+- !ruby/struct:SM::Flow::P 
+  body: For example. If Authentication.user_class is Customer and you have a PasswordStrategy, you can subclass the PasswordStrategy and change this method to return Staff. Giving you a PasswordStrategy strategy for first Customer(s) and then Staff.
+- !ruby/struct:SM::Flow::P 
+  body: "@api overwritable"
+full_name: Authentication::Strategy#user_class
+is_singleton: false
+name: user_class
+params: ()
+visibility: public

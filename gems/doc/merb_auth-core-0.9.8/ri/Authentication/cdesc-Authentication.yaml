@@ -1,0 +1,55 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: error_message
+  rw: W
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: session
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: default_strategy_order=
+- !ruby/object:RI::MethodSummary 
+  name: new
+- !ruby/object:RI::MethodSummary 
+  name: user_class
+comment: 
+constants: []
+
+full_name: Authentication
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Extlib::Hook
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: abandon!
+- !ruby/object:RI::MethodSummary 
+  name: authenticate!
+- !ruby/object:RI::MethodSummary 
+  name: authenticated?
+- !ruby/object:RI::MethodSummary 
+  name: error_message
+- !ruby/object:RI::MethodSummary 
+  name: errors
+- !ruby/object:RI::MethodSummary 
+  name: fetch_user
+- !ruby/object:RI::MethodSummary 
+  name: redirect!
+- !ruby/object:RI::MethodSummary 
+  name: redirect_options
+- !ruby/object:RI::MethodSummary 
+  name: redirect_status
+- !ruby/object:RI::MethodSummary 
+  name: redirect_url
+- !ruby/object:RI::MethodSummary 
+  name: redirected?
+- !ruby/object:RI::MethodSummary 
+  name: store_user
+- !ruby/object:RI::MethodSummary 
+  name: user
+- !ruby/object:RI::MethodSummary 
+  name: user=
+name: Authentication
+superclass: Object

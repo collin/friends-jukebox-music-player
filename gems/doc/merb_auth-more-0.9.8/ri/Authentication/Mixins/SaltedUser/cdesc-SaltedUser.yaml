@@ -1,0 +1,31 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: included
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: This mixin provides basic salted user password encryption.
+- !ruby/struct:SM::Flow::P 
+  body: "Added properties:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " :crypted_password, String\n :salt,             String\n"
+- !ruby/struct:SM::Flow::P 
+  body: To use it simply require it and include it into your user class.
+- !ruby/struct:SM::Flow::P 
+  body: class User
+- !ruby/struct:SM::Flow::VERB 
+  body: "  include Authentication::Mixins::SaltedUser\n"
+- !ruby/struct:SM::Flow::P 
+  body: end
+constants: []
+
+full_name: Authentication::Mixins::SaltedUser
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Authentication::Mixins::SaltedUser::InstanceMethods
+instance_methods: []
+
+name: SaltedUser
+superclass: 

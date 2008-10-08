@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Return authentication errors for a particular field_name.
+- !ruby/struct:SM::Flow::P 
+  body: "@param &lt;Symbol&gt; field_name the name of the field you want an error for"
+full_name: Authentication::Errors#on
+is_singleton: false
+name: "on"
+params: (field_name)
+visibility: public

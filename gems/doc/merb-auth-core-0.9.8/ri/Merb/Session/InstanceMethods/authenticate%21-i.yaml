@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Authenticates the session via the authentication object.
+- !ruby/struct:SM::Flow::P 
+  body: See Authentication#authenticate for usage
+full_name: Merb::Session::InstanceMethods#authenticate!
+is_singleton: false
+name: authenticate!
+params: (request, *rest)
+visibility: public

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>run! (Authentication::Strategies::Basic::Form)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/merb_auth-more/strategies/basic/password_form.rb, line 18</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run!</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">login_param</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">password_param</span>]
+            <span class="ruby-identifier">user</span> = <span class="ruby-identifier">user_class</span>.<span class="ruby-identifier">authenticate</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">login_param</span>], <span class="ruby-identifier">params</span>[<span class="ruby-identifier">password_param</span>])
+            <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">user</span>
+              <span class="ruby-identifier">request</span>.<span class="ruby-identifier">session</span>.<span class="ruby-identifier">authentication</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">clear!</span>
+              <span class="ruby-identifier">request</span>.<span class="ruby-identifier">session</span>.<span class="ruby-identifier">authentication</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">:login</span>, <span class="ruby-value str">'Username or password were incorrect'</span>)
+            <span class="ruby-keyword kw">end</span>
+            <span class="ruby-identifier">user</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

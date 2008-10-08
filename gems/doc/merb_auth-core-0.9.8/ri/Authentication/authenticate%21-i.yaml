@@ -1,0 +1,22 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: The workhorse of the framework. The authentiate! method is where the work is done. authenticate! will try each strategy in order either passed in, or in the default_strategy_order.
+- !ruby/struct:SM::Flow::P 
+  body: If a strategy returns some kind of user object, this will be stored in the session, otherwise a Merb::Controller::Unauthenticated exception is raised
+- !ruby/struct:SM::Flow::P 
+  body: "@params Merb::Request, [List,Of,Strategies, optional_options_hash]"
+- !ruby/struct:SM::Flow::P 
+  body: Pass in a list of strategy objects to have this list take precedence over the normal defaults
+- !ruby/struct:SM::Flow::P 
+  body: Use an options hash to provide an error message to be passed into the exception.
+- !ruby/struct:SM::Flow::P 
+  body: "@return user object of the verified user. An exception is raised if no user is found"
+full_name: Authentication#authenticate!
+is_singleton: false
+name: authenticate!
+params: (request, *rest)
+visibility: public

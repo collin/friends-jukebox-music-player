@@ -9,5 +9,9 @@ class Exceptions < Application
   def not_acceptable
     render :format => :html
   end
+  
+  def unauthorized
+    redirect url(:login)
+  end
 
 end
