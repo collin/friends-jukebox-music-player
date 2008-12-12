@@ -1,0 +1,13 @@
+-if @users.empty?
+  %h1 No potential new friends :(
+  %sub Check back later.
+  =link_to "Check out your profile!", url(:me) 
+-else
+  %h1 Find some Friends
+  %ul.followees
+    - for user in @users
+      %li
+        =label h(user.email)
+        =form_for fetch_user.followings.new(:followee => user), :action => url(:followings) do
+          =hidden_field :followee_id, :value => user.id
+          =submit "Follow"

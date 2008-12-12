@@ -1,0 +1,11 @@
+%h3 Prove yourself worthy...
+=error_messages_for session.authentication
+=form :action => slice_url(:merb_auth_slice_password, :perform_login), :method => :post do
+  =faux_put
+  =field "Email", :email
+  =field "Password", :password, :password_field
+  =submit "I am who I am"
+
+%p.invocation
+  Don't have a password? Join the fun.
+  =link_to "Gather round the Jukebox", url(:new_user)

@@ -1,0 +1,13 @@
+%h1 Following controller, new action
+
+%p 
+  Edit this file in 
+  %tt app/views/following/new.html.erb
+
+= error_messages_for @following
+
+= form_for(@following, :action => url(:following) ) do
+  %p
+    = submit "Create"
+
+= link_to 'Back', url(:following)

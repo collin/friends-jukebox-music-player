@@ -1,0 +1,5 @@
+%ul.blogs
+  -for blog in @blogs
+    %li
+      %h3
+        =link_to blog.title, resource(blog)

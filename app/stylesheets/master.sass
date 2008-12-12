@@ -1,0 +1,59 @@
+@import blueprint/screen.sass
+@import blueprint/modules/scaffolding.sass
+@import compass/reset.sass
+@import core_ext
+@import form
+@import followees_list
+
+html
+  +reset
+
+body
+  +blueprint
+  // Remove the scaffolding when you're ready to start doing visual design.
+  // Or leave it in if you're happy with how blueprint looks out-of-the-box
+  +blueprint-scaffolding
+  :background-color white
+  :margin 0 !important
+  
+#head
+  h1
+    :float left
+    :font
+      :size 36px
+      :weight bold
+      :family sans-serif
+  #user
+    :float right
+    :text-align right
+#container
+  +container
+  :clear both
+  
+  p
+    :line-height 2
+    &.instructions
+      :padding 1.5em 0
+  
+  ul
+    :margin 0
+    :padding 0
+    :list-style none
+  
+  
+  .add_a_track
+    form
+      :width auto
+    input
+      :width 818px
+  .tracks
+    h3 em
+      :color green
+      :font
+        :style normal
+        :size 10px
+        :family sans-serif
+        
+  #navigation
+    :margin-top 100px
+    :border-top 10px solid black

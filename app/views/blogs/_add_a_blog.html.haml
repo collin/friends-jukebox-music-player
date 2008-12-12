@@ -1,0 +1,6 @@
+.add_a_blog
+  %h3 Add a favorite Music Blog to Friends' Jukebox Music Player
+  =error_messages_for @blog, :header => ''
+  =form_for @blog, :action => url(:blogs) do
+    =required_field "Blog Address", :url
+    =submit "Add It!"

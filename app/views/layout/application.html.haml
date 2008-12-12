@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+%html
+  %head
+    %title Friends Jukebox Music Player
+    =utf8
+    =stylesheet
+    =favicon
+    =favideo
+    =javascript
+  %body
+    #head
+      %h1 the %{ Friends' Jukebox Music Player }%
+      -if session.authenticated?
+        #user
+          ==Welcome #{h fetch_user.email}
+          =form :method => :post, :action => url(:logout) do
+            =faux_delete
+            =submit "Sign Out"
+    #container
+      =catch_content
+      -if session.authenticated?
+        #navigation
+          =link_to "Tracks", url(:tracks)
+          =link_to "Artists", url(:artists)
+          =link_to "Friends", url(:me)
+          =partial 'tracks/add_a_track'
+          =partial 'blogs/add_a_blog'

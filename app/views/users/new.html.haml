@@ -1,0 +1,12 @@
+= form_for(@user, :action => url(:users) ) do
+  = error_messages_for @user
+
+  %h3 Sign Up
+  %p.instructions
+    With an email and a password, you can come back to the Friend's Jukebox Music
+    Player. We'll remember you, your friends and the selections you've made.
+  = required_field "Email Address", :email
+  = required_field "Password", :password, :password_field
+  = required_field "Confirm Password", :password_confirmation, :password_field
+  = submit "Sign Up"
+  
