@@ -19,3 +19,5 @@ src/*
 public/tracks/*
 gems/gems/*
 gems/doc/*
+gems/bin/*
+
