@@ -1,0 +1,82 @@
+/*
+Sass::SyntaxError: Undefined mixin 'span'.
+on line 8 of app/stylesheets/followees_list.sass
+
+4:     :padding 0px
+5:     :padding-top 2em
+6:     :list-style none 
+7:     label
+8:       +span(7)
+9:     li
+10:       :line-height 42px
+11:     form
+12:       :display inline
+13:     button
+14:       :display inline
+
+
+Backtrace:
+app/stylesheets/followees_list.sass:8
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/tree/mixin_node.rb:14:in `_perform'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/tree/node.rb:39:in `perform'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/tree/node.rb:58:in `perform_children'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/tree/node.rb:58:in `map'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/tree/node.rb:58:in `perform_children'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/tree/node.rb:54:in `perform!'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/tree/rule_node.rb:113:in `perform!'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/tree/node.rb:49:in `_perform'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/tree/node.rb:39:in `perform'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/tree/node.rb:58:in `perform_children'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/tree/node.rb:58:in `map'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/tree/node.rb:58:in `perform_children'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/tree/node.rb:54:in `perform!'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/tree/rule_node.rb:113:in `perform!'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/tree/node.rb:49:in `_perform'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/tree/node.rb:39:in `perform'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/tree/node.rb:58:in `perform_children'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/tree/node.rb:58:in `map'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/tree/node.rb:58:in `perform_children'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/tree/node.rb:54:in `perform!'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/tree/rule_node.rb:113:in `perform!'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/tree/node.rb:49:in `_perform'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/tree/node.rb:39:in `perform'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/tree/node.rb:58:in `perform_children'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/tree/node.rb:58:in `map'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/tree/node.rb:58:in `perform_children'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/tree/node.rb:54:in `perform!'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/tree/node.rb:49:in `_perform'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/tree/node.rb:39:in `perform'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/engine.rb:103:in `render'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/plugin.rb:75:in `update_stylesheet'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/plugin.rb:60:in `update_stylesheets'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/plugin.rb:55:in `each'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/plugin.rb:55:in `update_stylesheets'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/plugin.rb:53:in `each'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/plugin.rb:53:in `update_stylesheets'
+/home/collin/art/friends_jukebox_music_player/gems/gems/haml-2.1.0/lib/sass/plugin/merb.rb:31:in `call'
+/usr/lib/ruby/gems/1.8/gems/merb-core-1.0.4/lib/merb-core/rack/middleware/static.rb:28:in `call'
+/usr/lib/ruby/gems/1.8/gems/merb-core-1.0.4/lib/merb-core/rack/handler/mongrel.rb:82:in `process'
+/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:159:in `process_client'
+/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:158:in `each'
+/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:158:in `process_client'
+/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `run'
+/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `initialize'
+/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `new'
+/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `run'
+/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `initialize'
+/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `new'
+/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `run'
+/usr/lib/ruby/gems/1.8/gems/merb-core-1.0.4/lib/merb-core/rack/adapter/mongrel.rb:38:in `start_server'
+/usr/lib/ruby/gems/1.8/gems/merb-core-1.0.4/lib/merb-core/rack/adapter/abstract.rb:235:in `start_at_port'
+/usr/lib/ruby/gems/1.8/gems/merb-core-1.0.4/lib/merb-core/rack/adapter/abstract.rb:85:in `start'
+/usr/lib/ruby/gems/1.8/gems/merb-core-1.0.4/lib/merb-core/server.rb:174:in `bootup'
+/usr/lib/ruby/gems/1.8/gems/merb-core-1.0.4/lib/merb-core/server.rb:42:in `start'
+/usr/lib/ruby/gems/1.8/gems/merb-core-1.0.4/lib/merb-core.rb:170:in `start'
+/usr/lib/ruby/gems/1.8/gems/merb-core-1.0.4/bin/merb:11
+/usr/bin/merb:19:in `load'
+/usr/bin/merb:19
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Sass::SyntaxError: Undefined mixin 'span'.\A on line 8 of app/stylesheets/followees_list.sass\A \A 4:     :padding 0px\A 5:     :padding-top 2em\A 6:     :list-style none \A 7:     label\A 8:       +span(7)\A 9:     li\A 10:       :line-height 42px\A 11:     form\A 12:       :display inline\A 13:     button\A 14:       :display inline\A "; }
