@@ -1,0 +1,2 @@
+sudo morbid &
+sudo orbited --config=config/orbited
