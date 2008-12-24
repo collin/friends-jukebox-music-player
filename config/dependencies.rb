@@ -29,3 +29,4 @@ dependency "rfeedparser"
 dependency "dm-is-list", dm_gems_version
 
 dependency "earworm"
+dependency "faker"
