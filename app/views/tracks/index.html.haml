@@ -1,7 +1,0 @@
-%ul.tracks
-  -for track in @tracks
-    %li
-      %h3
-        =link_to track.title, resource(track)
-        %em
-          =link_to track.artist.accolade, resource(track.artist )

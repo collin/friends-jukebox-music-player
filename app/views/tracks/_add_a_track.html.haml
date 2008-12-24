@@ -1,6 +1,0 @@
-.add_a_track
-  %h3 Add a Track to Friends' Jukebox Music Player
-  =error_messages_for @source, :header => ''
-  =form_for @source, :action => url(:sources) do
-    =required_field "Url For Track", :url
-    =submit "Add It!"
