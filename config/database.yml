@@ -2,8 +2,11 @@
 # This is a sample database file for the DataMapper ORM
 development: &defaults
   # These are the settings for repository :default
-  adapter:  sqlite3
-  database: friends_jukebox_music_player_development.db
+  adapter:  mysql
+  database: tested_jukebox_development
+  username: root
+  password:
+  host: localhost
  
   # Add more repositories
   # repositories:
@@ -15,7 +18,7 @@ development: &defaults
  
 test:
   <<:       *defaults
-  database: sample_test.db
+  database: tested_jukebox_test
  
   # repositories:
   #   repo1:
