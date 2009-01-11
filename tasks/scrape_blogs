@@ -1,0 +1,1 @@
+cd /home/collin/art/friends_jukebox_music_player/ && merb -r /home/collin/art/friends_jukebox_music_player/tasks/scrape_blogs.rb

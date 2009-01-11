@@ -1,32 +1,24 @@
 require File.join( File.dirname(__FILE__), '..', "spec_helper" )
-PrimaryUrl   = "http://notmanyexperts.blogspot.com/"
-AlternateUrl = "http://notmanyexperts.blogspot.com/feeds/posts/default"
-
-class Blog
-  def self.make attrs={}
-
-    defaults = {
-      :url => PrimaryUrl
-    }
-
-    send attrs.delete(:new) ? 'new' : 'create', defaults.merge(attrs)
-  end
-end
-
+require File.join( File.dirname(__FILE__), '..', "blog_fixtures" )
 
 describe Blog do
+  before :each do
+    Blog.all.destroy!
+    BlogPost.all.destroy!
+  end
+
+  it "creates blogs" do
+    Blog.make.id.should_not be_nil
+  end
 
   it "should have a url" do
     Blog.make(:url => nil).
       errors.on(:url).should_not be_empty
   end
   
-  it "stores urls as URI" do
-    Blog.make.url.should be_is_a(Addressable::URI)
-  end
-  
-  it "stores alternate_urls as URI" do
-    Blog.make.alternate_url.should be_is_a(Addressable::URI)
+  it "requires url uniqueness" do
+    Blog.make.errors.on(:url).should     be_nil
+    Blog.make.errors.on(:url).should_not be_nil
   end
   
   it "fetches feed url" do
@@ -36,7 +28,7 @@ describe Blog do
   it "doesn't fetch feed url if url is a feed" do
     b= Blog.make(:url => AlternateUrl)
     
-    b.url.to_s.should == b.alternate_url.to_s
+    b.url.should == b.alternate_url
   end
   
   it "fetches feed into cache" do
@@ -54,15 +46,51 @@ describe Blog do
     Blog.new.should be_stale
   end
   
-  it "stale after 60 minutes" do
+  it "has a time to live of 60 minutes" do
+    Blog.time_to_live.should == 60.minutes
+  end
+  
+  it "stale after time_to_live" do
     b = Blog.make
-    b.updated_at += 61
+    b.updated_at = (b.updated_at.to_time - (Blog.time_to_live + 1.minute)).to_datetime
     b.should be_stale
   end
   
-  it "not stale under 60 minutes" do
+  it "not stale under time_to_live" do
     b = Blog.make
-    b.updated_at += 45
+    b.updated_at = DateTime.now
     b.should_not be_stale
+  end
+  
+  it "stale blogs are stale" do
+    b=Blog.make
+    b.updated_at = (b.updated_at.to_time - (Blog.time_to_live + 1.minute)).to_datetime
+    b.save!
+    Blog.stale.should == [b]
+  end
+  
+  it "gets title from feed" do
+    Blog.make.title.should == BlogTitle
+  end
+  
+  it "uses primary url as title in absense of feed title" do
+    b = Blog.new :url => "http://google.com"
+    b.title.should == "http://google.com"
+  end
+  
+  it "makes corresponding blog posts" do
+    b=Blog.make
+    b.generate_blog_posts!
+    b.blog_posts.map{|post| post.blog}.
+      should == [b,b,b,b]
+  end
+  
+  it "rejects non-feeds" do
+    Blog.make(:url => "http://google.com").
+      errors.on(:url).should_not be_nil
+  end
+  
+  it "stale on creation" do
+    Blog.make.stale?.should be_true
   end
 end

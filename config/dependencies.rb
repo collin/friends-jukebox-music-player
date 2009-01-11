@@ -30,3 +30,5 @@ dependency "dm-is-list", dm_gems_version
 
 dependency "earworm"
 dependency "faker"
+
+dependency "google_ajax_feed_api", "0.0.2"

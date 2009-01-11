@@ -33,6 +33,8 @@ Merb::BootLoader.after_app_loads do
   Merb::Authentication.default_strategy_order = [
     Merb::Authentication::Strategies::FormLogin
   ]
+  
+  DataMapper.auto_migrate! if Merb.env == 'profile'
 end
 
 class String

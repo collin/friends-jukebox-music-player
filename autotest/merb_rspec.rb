@@ -18,6 +18,8 @@ class Autotest::MerbRspec < Autotest
     # Ignore SCM directories and custom Autotest mappings
     %w[.svn .hg .git .autotest].each { |exception| add_exception(exception) }
 
+    add_exception 'spec/blog_fixtures.rb'    
+    
     # Ignore any mappings that Autotest may have already set up
     clear_mappings
 
@@ -30,6 +32,7 @@ class Autotest::MerbRspec < Autotest
     add_mapping %r%^spec/(spec_helper|shared/.*)\.rb$% do
       all_specs
     end
+    
 
     # Changing a spec will cause it to run itself
     add_mapping %r%^spec/.*\.rb$% do |filename, _|

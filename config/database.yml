@@ -19,6 +19,10 @@ development: &defaults
 test:
   <<:       *defaults
   database: tested_jukebox_test
+
+profile:
+  <<:       *defaults
+  database: tested_jukebox_profile
  
   # repositories:
   #   repo1:
