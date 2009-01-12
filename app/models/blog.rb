@@ -1,4 +1,4 @@
-class Blog < Google::Ajax::Feed
+class Blog
   include DataMapper::Resource
 
   property :id, Serial
@@ -14,29 +14,18 @@ class Blog < Google::Ajax::Feed
   
   timestamps :at
     
-  before :valid?, :url_to_canonical_id
+  before :valid?, :set_url_to_canonical_id
   before :valid?, :set_timestamps
   
   before :create, :make_stale
   before :create,  :cache_feed
   
-  def initialize url
-    @url = url
-  end
-  
   def generate_blog_posts!
-    fetch_feed_content
     entries.each do |entry|
       self.blog_posts.create :url => entry.link, :entry => entry
     end
   end
-  
-  def fetch_feed_content
-    return if stale
-    load
-    self.cache = feed
-  end
-  
+ 
   def make_stale
     self.updated_at = (Time.now - (Blog.time_to_live + 1)).to_datetime
   end
@@ -51,27 +40,27 @@ class Blog < Google::Ajax::Feed
   end
 
   def set_url_to_canonical_id
-    self.url = canonical_id
+    self.url = google_feed && google_feed.canonical_id
+  end
+  
+  def google_feed
+    @google_feed||= Google::Ajax::Feed.lookup(url) unless url.nil?
   end
   
   def cache_feed
-    self.cache = feed if stale?
+    return unless stale?
+    self.cache = google_feed
   end
   
-  def feed
-    if cache.nil?
-      super
-    else
-      cache
-    end
+  def title
+    cache and (cache.title or cache.link)
   end
   
-  def self.lookup url
-    blog = super(url)
-    unless blog && blog.save
-      first :url => blog.canonical_id
+  def method_missing method, *args, &block
+    if cache.respond_to? method
+      cache.send method, *args, &block
     else
-      blog
+      super method, *args, &block
     end
   end
   

@@ -21,7 +21,7 @@ class BlogPost
   end
   
   def doc
-    @doc ||= Hpricot.parse entry.content.first.value
+    @doc ||= Hpricot.parse entry.content
   end
   
   def title

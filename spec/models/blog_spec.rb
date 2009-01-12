@@ -21,16 +21,6 @@ describe Blog do
     Blog.make.errors.on(:url).should_not be_nil
   end
   
-  it "fetches feed url" do
-    Blog.make.alternate_url.to_s.should == AlternateUrl
-  end
-
-  it "doesn't fetch feed url if url is a feed" do
-    b= Blog.make(:url => AlternateUrl)
-    
-    b.url.should == b.alternate_url
-  end
-  
   it "fetches feed into cache" do
     Blog.make.cache.should_not be_nil
   end
@@ -39,7 +29,7 @@ describe Blog do
     b = Blog.make
     cache = b.cache
     b.reload
-    b.cache.should_not be_nil?
+    b.cache.should_not be_nil
   end
   
   it "stale when new record" do
@@ -71,11 +61,6 @@ describe Blog do
   
   it "gets title from feed" do
     Blog.make.title.should == BlogTitle
-  end
-  
-  it "uses primary url as title in absense of feed title" do
-    b = Blog.new :url => "http://google.com"
-    b.title.should == "http://google.com"
   end
   
   it "makes corresponding blog posts" do

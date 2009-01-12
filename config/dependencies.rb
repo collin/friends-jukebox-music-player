@@ -25,10 +25,10 @@ dependency "dm-validations", dm_gems_version
 # non-Stack deps
 dependencies "merb-haml", "compass" 
 dependency "haml", "2.1.0"
-dependency "rfeedparser"
 dependency "dm-is-list", dm_gems_version
 
 dependency "earworm"
 dependency "faker"
+dependency "hpricot"
 
-dependency "google_ajax_feed_api", "0.0.2"
+dependency "google_ajax_feed_api", "0.0.4"
