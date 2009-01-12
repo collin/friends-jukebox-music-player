@@ -1,0 +1,11 @@
+--- !ruby/object:Google::Ajax::Feed::Entry 
+data: 
+  author: quinn
+  title: leetle groove
+  contentSnippet: my first song evarr! it&#8217;s cheesy, but still, its my first.
+  publishedDate: Sun, 12 Oct 2008 13:41:19 -0700
+  content: "<p>\n\
+    my first song evarr! it\xE2\x80\x99s cheesy, but still, its my first.</p>"
+  categories: 
+  - Uncategorized
+  link: http://olympichifi.com/2008/10/12/leetle-groove/

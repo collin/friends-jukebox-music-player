@@ -28,8 +28,15 @@ describe BlogPost do
       errors.on(:blog).should_not be_nil
   end
   
-  it "greps tracks" do
+  it "greps tracks from src and hrefs" do
     BlogPost.make.tracks.should == [FirstTrack]
+  end
+  
+  it "greps wordpress audio plugins" do
+    BlogPost.make(
+      :url => LeetleGroovePost.link, 
+      :entry => LeetleGroovePost
+    ).tracks.should == [LeetleGroove]
   end
   
   it "pulls title from entry" do
