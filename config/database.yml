@@ -30,7 +30,7 @@ profile:
  
 production:
   <<:       *defaults
-  database: production.db
+  database: jukebox_production
  
   # repositories:
   #   repo1:
