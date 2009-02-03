@@ -32,11 +32,35 @@ describe BlogPost do
     BlogPost.make.tracks.should == [FirstTrack]
   end
   
-  it "greps wordpress audio plugins" do
+  it "greps wordpress audio plugins with flashvars" do
+    bp = BlogPost.new
+    bp.meta_def :page do; StAndrew[:page] end
+    bp.wordpress_flashvars(:page).should == StAndrew[:tracks]
+  end
+  
+  it "greps tracks for src and hrefs page st_andrew" do
+    bp = BlogPost.new
+    bp.meta_def :page do; StAndrew[:page] end
+    bp.href_and_src(:page).should == StAndrew[:tracks]
+  end
+  
+  it "doesn't double up on tracks from page" do
+    bp = BlogPost.new
+    bp.meta_def :page do; StAndrew[:page] end
+    bp.tracks_from_page.should == StAndrew[:tracks]
+  end
+  
+  it "greps wordpress audio plugins with javascript source" do
     BlogPost.make(
       :url => LeetleGroovePost.link, 
       :entry => LeetleGroovePost
     ).tracks.should == [LeetleGroove]
+  end
+  
+  it "greps tumblr audio" do
+    bp = BlogPost.new
+    bp.meta_def :page do; Tumblr[:page] end
+    bp.tracks_from_page.should == Tumblr[:tracks]
   end
   
   it "pulls title from entry" do
